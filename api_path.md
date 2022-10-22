@@ -70,8 +70,7 @@ To get status if citizen have right to vote or not.
 ```js
 {
     "nameOfVoter": "string",
-    "citizenID":  12356789456, 
-    "voteStatus": true, // if voted is true else  false
+    "citizenID":  12356789456,
     "location": "string" ,
     "RightToVote" : true, // If right ot vote is true else will be false.
     "CitizenCVV" : 456  

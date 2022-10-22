@@ -1,16 +1,16 @@
 # JSON Format
 
-```
+```js
 {
-     “location”:string,
-     “location_id”: number, 
-     “population”: number,
-     “numberOfVoters”: number,
-     “member_id: number,
-     “nameOfParliament”: string,
-     “nameOfParty”: string,
-     “numberOfVotes”: number,
-     “lastUpdatedTime”: string
+     "location":string,
+     "location_id": number, 
+     "population": number,
+     "numberOfVoters": number,
+     "member_id": number,
+     "nameOfParliament": string,
+     "nameOfParty": string,
+     "numberOfVotes": number,
+     "lastUpdatedTime": string
 }
 ```
 
