@@ -50,10 +50,6 @@ so that I can give access to the voter who has the right.
 
 ### Acceptance Criteria
 
-Given Government have population database  
-When election committee send request  
-Then I will send the voter’s right to vote  
-
 Given a Election committee get the right to vote of the voter  
 When election committee requests from the government  
 Then election commission can give access to voter  
