@@ -36,8 +36,9 @@ To get election data for all location.
         .
         .
     ]
-    ```
+    
 }
+```
 
 ### ```/election-data/{location-id}```
 For get detailed election data in that location.  
