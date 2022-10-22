@@ -27,3 +27,4 @@ It's the number of population in this location
 It's the number of people that have a right to vote in this location
 
 ### member_id
+sf
