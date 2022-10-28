@@ -60,23 +60,6 @@ For get detailed election data in that location.
 }
 ```
 
-
-### ```/voter/validation/{citizen_id}```
-To get status if citizen have right to vote or not.  
-
-**Parameters:** citizen_id    
-**Content type:** application/json    
-**Response:** 200 OK    
-```js
-{
-    "nameOfVoter": "string",
-    "citizenID":  12356789456,
-    "location": "string" ,
-    "RightToVote" : true, // If right ot vote is true else will be false.
-    "CitizenCVV" : 456  
-}
-```
-
 ## ```PUT```
 
 ### ```/election-data/parliament/{location-id}```

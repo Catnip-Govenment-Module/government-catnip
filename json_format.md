@@ -83,5 +83,5 @@ The person's residence id
 ### rightToVote
 A person's eligibility to cast a ballot in an election
 
-###
+### blacklist
 a person's eligibility to register to be a member of parliament in an election
