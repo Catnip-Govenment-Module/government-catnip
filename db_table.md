@@ -128,13 +128,13 @@ ID of district
 The district's name
 
 ### districtTH
-The name of the district in Thai
+The name of the district in Thai language
 
 ### province
 The province's name
 
 ### provinceTH
-The name of the province in Thai
+The name of the province in Thai language
 
 ### region
 The region's name

@@ -2,8 +2,44 @@
 
 ##  ```GET```
 
-### ```/election-data```
-To get election data for all location.  
+### ```/population```
+Get the population data
+
+**Content type:** application/json  
+**Response:** 200 OK
+
+```js
+{
+    [
+        {
+            "_id": 1234567898765, // Citizen ID
+            "title": "Ms.", // Person's title
+            "firstName": "Achara", // First name
+            "lastName": "Sukkasem", // Last name
+            "sex": "Female", // Gender
+            "locationID": 231, // Location ID 
+            "rightToVote": True, // The person have a right to vote or not
+            "blackList": False // The person have a right to be MP or not
+        },
+        {
+            "_id": 4569871354123,
+            "title": "Mr.",
+            "firstName": "Anuman",
+            "lastName": "Saengthong",
+            "sex": "Male",
+            "locationID": 557,
+            "rightToVote": True,
+            "blackList": False
+        },
+        .
+        .
+        .
+    ]
+}
+```
+
+### ```/location```
+To get all information about election of all district  
 
 **Content type:** application/json  
 **Response:** 200 OK  
@@ -11,26 +47,16 @@ To get election data for all location.
 {
     [
         {
-            "location": "string", // Location
             "location_id": 1, // ID of location
-            "population": 10000, // population in this location
-            "numberOfVoters": 9995, 
-            "member_id": 0, // ID of MP
-            "nameOfParliament": "", 
-            "nameOfParty": "",
-            "numberOfVotes": 9995,// The current amount of votes
-            "lastUpdatedTime": "" // This request's timing
+            "location": "Amphawa", // Location
+            "population": 10000, // Population in this location
+            "numberOfVoters": 9995 // Amount of who have right to vote
         },
         {
-            "location": "string1", // Location
-            "location_id": 2, // ID of location
-            "population": 20000, // population in this location
-            "numberOfVoters": 18995, 
-            "member_id": 0, // ID of MP
-            "nameOfParliament": "", 
-            "nameOfParty": "",
-            "numberOfVotes": 10000,// The current amount of votes
-            "lastUpdatedTime": "" // This request's timing
+            "location_id": 2,
+            "location": "Bang Len",
+            "population": 20000,
+            "numberOfVoters": 18995
         },
         .
         .
@@ -40,59 +66,69 @@ To get election data for all location.
 }
 ```
 
-### ```/election-data/{location-id}```
-For get detailed election data in that location.  
+### ```/election-result```
+For get detailed election data of all location.  
 
 **Content type:** application/json  
-**Parameters:** location-id  # ID of location  
 **Response:** 200 OK  
+
 ```js
 {
-    "location": "string", // Location
-    "location_id": 1, // ID of location
-    "population": 10000, // population in this location
-    "numberOfVoters": 9995, 
-    "member_id": 0, // ID of MP
-    "nameOfParliament": "", 
-    "nameOfParty": "",
-    "numberOfVotes": 10000,// The current amount of votes
-    "lastUpdatedTime": "" // This request's timing
+    [
+        {
+            "district": "Amphawa", // District
+            "districtTH": "อัมพวา", // District in Thai language
+            "province": "Samut Songkhram", // Province
+            "provinceTH": "สมุทรปราการ", // Province in Thai language
+            "region": "centre", // Region
+            "nameOfParliament": "Jakarin Chujan", // Parliament name
+            "nameOfParty": "Catnip" // Party that parliament are with
+        },
+        {
+            "district": "Bang Len",
+            "districtTH": "บางเลน",
+            "province": "Phichit",
+            "provinceTH": "พิจิตร"
+            "region": "centre",
+            "nameOfParliament": "Chananya Photan",
+            "nameOfParty": "Catnip"
+        },
+        .
+        .
+        .
+    ]
 }
 ```
 
-## ```PUT```
+## ```POST```
 
-### ```/election-data/parliament/{location-id}```
-To update MP for specific location id.  
+### ```/election-result```
+To update the election detail.  
 
-**Parameters:** location-id  # ID of location  
 **Request body:** application/json  
-```js
-{
-    "location": "string", // Location
-    "location_id": 1, // ID of location
-    "population": 10000, // population in this location
-    "numberOfVoters": 9995, 
-    "member_id": 0, // ID of MP
-    "nameOfParliament": "", 
-    "nameOfParty": "",
-    "numberOfVotes": 9900,// The current amount of votes
-    "lastUpdatedTime": "" // This request's timing
-}
-
-```
-**Content type:** application/json  
 **Response:** 200 OK  
+
 ```js
 {
-    "location": "string", // Location
-    "location_id": 1, // ID of location
-    "population": 10000, // population in this location
-    "numberOfVoters": 9995, 
-    "member_id": 0, // ID of MP
-    "nameOfParliament": "string", 
-    "nameOfParty": "string",
-    "numberOfVotes": 9995,// The current amount of votes
-    "lastUpdatedTime": "" // This request's timing
+    [
+        {
+            "location_id": 1, // ID of location
+            "location": "Amphawa", // Location
+            "numberOfVotes": 9900,// The current amount of votes
+            "nameOfParliament": "Jakarin Chujan", // Parliament name
+            "nameOfParty": "Catnip" // Party that parliament are with
+            
+        },
+        {
+            "location_id": 2,
+            "location": "Bang Len",
+            "numberOfVotes": 9900,
+            "nameOfParliament": "Chananya Photan", 
+            "nameOfParty": "Catnip"
+        }
+        .
+        .
+        .
+    ]
 }
 ```
