@@ -4,16 +4,18 @@
 
 ```js
 {
+     "_id": "number",
      "title": "string",
      "firstName": "string",
      "lastName": "string",
      "sex": "string",
-     "citizenID": "string",
      "locationID": "number",
      "rightToVote": "boolean",
      "blackList": "boolean"
 }
 ```
+### _id
+The person's citizen identification number
 
 ### title
 Titles prefixing a person's name
@@ -26,9 +28,6 @@ A person's last name
 
 ### sex
 A person's sex
-
-### citizenID
-The person's citizen identification number
 
 ### locationID
 The person's residence id
@@ -43,12 +42,12 @@ a person's eligibility to register to be a member of parliament in an election
 
 ```js
 {
-     "citizenID": string,
+     "_id": string,
      "citizenCVV": hash
 }
 ```
 
-### citizenID
+### _id
 The person's citizen identification number
 
 ### citizenCVV
