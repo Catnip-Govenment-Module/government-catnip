@@ -112,6 +112,7 @@ Last time data have been updated
 
 ```js
 {
+     "_id": string,
      "district": string,
      "districtTH": string,
      "province": string,
@@ -119,6 +120,9 @@ Last time data have been updated
      "region": string
 }
 ```
+
+### _id
+ID of district
 
 ### district
 The district's name
