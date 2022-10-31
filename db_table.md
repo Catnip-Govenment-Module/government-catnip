@@ -77,6 +77,23 @@ It's the number of population in this location
 ### numberOfVoters
 It's the number of people that have a right to vote in this location
 
+## election_result
+
+```js
+{
+     "locationID" : string,
+     "memberID": number,
+     "nameOfParliament": string,
+     "nameOfParty": string,
+     "numberOfVotes": number,
+     "lastUpdatedTime": string
+}
+     
+```
+
+### locationID
+ID of district
+
 ### memberID
 ID of member of parliament in location
 
@@ -92,12 +109,29 @@ Amount of population have been voted in this location
 ### lastUpdatedTime
 Last time data have been updated 
 
+## district
 
+```js
+{
+     "district": string,
+     "districtTH": string,
+     "province": string,
+     "provinceTH": string,
+     "region": string
+}
+```
 
-```
-     "memberID": number,
-     "nameOfParliament": string,
-     "nameOfParty": string,
-     "numberOfVotes": number,
-     "lastUpdatedTime": string
-```
+### district
+The district's name
+
+### districtTH
+The name of the district in Thai
+
+### province
+The province's name
+
+### provinceTH
+The name of the province in Thai
+
+### region
+The region's name
