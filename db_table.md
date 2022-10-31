@@ -4,14 +4,14 @@
 
 ```js
 {
-     "_id": "number",
-     "title": "string",
-     "firstName": "string",
-     "lastName": "string",
-     "sex": "string",
-     "locationID": "number",
-     "rightToVote": "boolean",
-     "blackList": "boolean"
+     "_id": number,
+     "title": string,
+     "firstName": string,
+     "lastName": string,
+     "sex": string,
+     "locationID": number,
+     "rightToVote": boolean,
+     "blackList": boolean
 }
 ```
 ### _id
@@ -42,7 +42,7 @@ a person's eligibility to register to be a member of parliament in an election
 
 ```js
 {
-     "_id": string,
+     "_id": number,
      "citizenCVV": hash
 }
 ```
@@ -57,18 +57,18 @@ The person's citizen identification card verification value number
 
 ```js
 {
+     "_id": number, 
      "location": string,
-     "locationID": number, 
      "population": number,
      "numberOfVoters": number
 }
 ```
 
+### _id
+It's the id of District
+
 ### location
 It's the name of District
-
-### locationID
-It's the id of District
 
 ### population
 It's the number of population in this location
@@ -80,7 +80,7 @@ It's the number of people that have a right to vote in this location
 
 ```js
 {
-     "locationID" : string,
+     "_id" : number,
      "memberID": number,
      "nameOfParliament": string,
      "nameOfParty": string,
@@ -90,7 +90,7 @@ It's the number of people that have a right to vote in this location
      
 ```
 
-### locationID
+### _id
 ID of district
 
 ### memberID
