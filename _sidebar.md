@@ -1,5 +1,5 @@
 * [Home](/)
 * [User Story](user_story.md)
 * [API Path](api_path.md)  
-* [Json Format](json_format.md)
+* [Database Table](db_table.md)
 * [Configuration Items](config_items.md)
