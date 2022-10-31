@@ -16,9 +16,9 @@ Dev (all of us) can access all documents and code. but change need to be approve
 
 
 ## Gantt Chart
-![GanttChart](gantt-edited.png)
+![GanttChart](image/gantt-edited.png)
 
 
 ## PERT Diagram
 
-![PERT](PERT-edited.png)
+![PERT](image/PERT-edited.png)
