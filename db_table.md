@@ -1,18 +1,67 @@
 # Table in DataBase
 
-## Location
+## personal_information
 
 ```js
 {
-     "location":string,
+     "title": "string",
+     "firstName": "string",
+     "lastName": "string",
+     "sex": "string",
+     "citizenID": "string",
+     "locationID": "number",
+     "rightToVote": "boolean",
+     "blackList": "boolean"
+}
+```
+
+### title
+Titles prefixing a person's name
+
+### firstName
+A person's first name
+
+### lastName
+A person's last name
+
+### sex
+A person's sex
+
+### citizenID
+The person's citizen identification number
+
+### locationID
+The person's residence id
+
+### rightToVote
+A person's eligibility to cast a ballot in an election
+
+### blacklist
+a person's eligibility to register to be a member of parliament in an election
+
+## personal_cvv
+
+```js
+{
+     "citizenID": string,
+     "citizenCVV": hash
+}
+```
+
+### citizenID
+The person's citizen identification number
+
+### citizenCVV
+The person's citizen identification card verification value number
+
+## location_information
+
+```js
+{
+     "location": string,
      "locationID": number, 
      "population": number,
-     "numberOfVoters": number,
-     "memberID": number,
-     "nameOfParliament": string,
-     "nameOfParty": string,
-     "numberOfVotes": number,
-     "lastUpdatedTime": string
+     "numberOfVoters": number
 }
 ```
 
@@ -43,45 +92,12 @@ Amount of population have been voted in this location
 ### lastUpdatedTime
 Last time data have been updated 
 
-## Population
 
-```js
-{
-     "title": "string",
-     "firstName": "string",
-     "lastName": "string",
-     "sex": "string",
-     "citizenID": "string",
-     "citizenCVV": "string",
-     "locationID": "number",
-     "rightToVote": "boolean",
-     "blackList": "boolean"
-}
+
 ```
-
-### title
-Titles prefixing a person's name
-
-### firstName
-A person's first name
-
-### lastName
-A person's last name
-
-### sex
-A person's sex
-
-### citizenID
-The person's citizen identification number
-
-### citizenCVV
-The person's citizen identification card verification value number
-
-### locationID
-The person's residence id
-
-### rightToVote
-A person's eligibility to cast a ballot in an election
-
-### blacklist
-a person's eligibility to register to be a member of parliament in an election
+     "memberID": number,
+     "nameOfParliament": string,
+     "nameOfParty": string,
+     "numberOfVotes": number,
+     "lastUpdatedTime": string
+```
