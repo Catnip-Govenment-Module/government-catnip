@@ -4,7 +4,7 @@
 
 **Title**: Population Data 
 **Priority**: Must have  
-**Estimate**:
+**Estimate**: 2
 
 ### User Story
 
@@ -23,7 +23,7 @@ Then they can use it for the election
 
 **Title**: Check CVV  
 **Priority**: Must have  
-**Estimate**:
+**Estimate**: 2
 
 ### User Story
 
@@ -41,7 +41,7 @@ Then the election committee allows the user to right to vote if the user's CVV i
 
 **Title**: Location Data
 **Priority**: Must have  
-**Estimate**:
+**Estimate**: 3
 
 ### User Story
 
@@ -59,7 +59,7 @@ Then they can use it for the election
 
 **Title**: Get Election Result from EC
 **Priority**: Must have  
-**Estimate**:
+**Estimate**: 2
 
 ### User Story
 
@@ -77,7 +77,7 @@ Then the government collects it on the database.
 
 **Title**: Send Election Result to the voter
 **Priority**: Must have  
-**Estimate**:
+**Estimate**: 2
 
 ### User Story
 
