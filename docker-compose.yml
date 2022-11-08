@@ -14,3 +14,13 @@ services:
     volumes:
       - ./database/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 #      - ./init-mongodb/data:/tmp/data — contains a JSON file with an array
+
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8000:80"
+    volumes:
+      - ./app:/code/app
