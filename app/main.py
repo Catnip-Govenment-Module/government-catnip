@@ -2,15 +2,16 @@
 # from uuid import UUID
 from fastapi import FastAPI, HTTPException
 
-# from pymongo import MongoClient
+from pymongo import MongoClient
 
 # from models.models import Gender, Role, User
 
 app = FastAPI()
 
+client = MongoClient("mongodb://localhost:27017/")
+db = client["GovernmentCatnip"]
+dbLocations = db["location_information"]
 
-# client = MongoClient("mongodb://localhost:27017/")
-# db = client["GovernmentCatnip"]
 
 # db: List[User] = [
 #    User(
@@ -35,6 +36,13 @@ async def root():
         "message": "Sup for our documentation go to link variable",
         "link": "https://catnip-govenment-module.github.io/government-catnip"
     }
+
+
+@app.get("/api/v1/locations")
+def locations():
+    location = dbLocations.find()
+    list_location = [l for l in location]
+    return list_location
 
 # @app.get("/api/v1/users")
 # async def fetch_users():
