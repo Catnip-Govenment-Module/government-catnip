@@ -1,7 +1,10 @@
 # from typing import List
 # from uuid import UUID
+from typing import List
+
 import uvicorn
 from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
 
 from pymongo import MongoClient
 
@@ -31,6 +34,7 @@ dbLocations = db["location_information"]
 #    )
 # ]
 
+
 @app.get("/")
 async def root():
     return {
@@ -39,7 +43,14 @@ async def root():
     }
 
 
-@app.get("/api/v1/locations", summary="Return all location with detail")
+class Location(BaseModel):
+    id: int
+    location: str
+    population: int
+    numberOfVoter: int
+
+
+@app.get("/api/v1/locations", summary="Return all location with detail", response_model=List[Location])
 def locations():
     location = dbLocations.find()
     list_location = [l for l in location]
