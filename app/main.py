@@ -1,5 +1,6 @@
 # from typing import List
 # from uuid import UUID
+import uvicorn
 from fastapi import FastAPI, HTTPException
 
 from pymongo import MongoClient
@@ -8,8 +9,8 @@ from pymongo import MongoClient
 
 app = FastAPI()
 
-client = MongoClient("mongodb://localhost:27017/")
-db = client["GovernmentCatnip"]
+client = MongoClient("mongodb://localhost:27018/")
+db = client["government_catnip"]
 dbLocations = db["location_information"]
 
 
@@ -38,11 +39,12 @@ async def root():
     }
 
 
-@app.get("/api/v1/locations")
+@app.get("/api/v1/locations", summary="Return all location with detail")
 def locations():
     location = dbLocations.find()
     list_location = [l for l in location]
     return list_location
+
 
 # @app.get("/api/v1/users")
 # async def fetch_users():
@@ -64,3 +66,5 @@ def locations():
 #            detail=f"user with id: {user_id} does not exists"
 #        )
 #
+if __name__ == '__main__':
+    uvicorn.run("main:app", reload=True)
