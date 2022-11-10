@@ -1,14 +1,14 @@
 #from typing import List
 #from uuid import UUID
 from fastapi import FastAPI, HTTPException
-#from pymongo import MongoClient
+from pymongo import MongoClient
 
 #from models.models import Gender, Role, User
 
 app = FastAPI()
 
-#client = MongoClient("mongodb://localhost:27017/")
-#db = client["GovernmentCatnip"]
+client = MongoClient(host="db")
+db = client["government_catnip"]
 
 #db: List[User] = [
 #    User(

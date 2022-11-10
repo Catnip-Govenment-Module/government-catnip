@@ -4,8 +4,7 @@ version: '3.8'
 services:
   
   # Database - Mongo DB
-  database:
-    container_name: mongodb
+  db:
     image: mongo
     environment:
       MONGO_INITDB_DATABASE: government_catnip
