@@ -1,11 +1,11 @@
 from typing import List
-#from uuid import UUID
+# from uuid import UUID
 import uvicorn
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from pymongo import MongoClient
 
-#from models.models import Gender, Role, User
+# from models.models import Gender, Role, User
 
 app = FastAPI()
 
@@ -13,7 +13,8 @@ client = MongoClient(host="db")
 db = client["government_catnip"]
 dbLocations = db["location_information"]
 
-#db: List[User] = [
+
+# db: List[User] = [
 #    User(
 #        id="31b6e462-4c9a-4d3d-a00a-e7a8fc43c4e7", 
 #        first_name="Jamila", 
@@ -28,7 +29,7 @@ dbLocations = db["location_information"]
 #        gender=Gender.male,
 #        roles=[Role.admin, Role.user]
 #    )
-#]
+# ]
 
 
 @app.get("/")
@@ -39,14 +40,7 @@ async def root():
     }
 
 
-class Location(BaseModel):
-    id: int
-    location: str
-    population: int
-    numberOfVoter: int
-
-
-@app.get("/api/v1/locations", summary="Return all location with detail", response_model=List[Location])
+@app.get("/api/v1/locations", summary="Return all location with detail")
 def locations():
     location = dbLocations.find()
     list_location = [l for l in location]
@@ -57,13 +51,13 @@ def locations():
 # async def fetch_users():
 #    return db;
 #
-#@app.post("/api/v1/users")
-#async def register_user(user: User):
+# @app.post("/api/v1/users")
+# async def register_user(user: User):
 #    db.append(user)
 #    return {"id": user.id}
 #
-#@app.delete("/api/v1/users/{user_id}")
-#async def delete_user(user_id: UUID):
+# @app.delete("/api/v1/users/{user_id}")
+# async def delete_user(user_id: UUID):
 #        for user in db:
 #            if user.id == user_id:
 #                db.remove(user)
@@ -73,5 +67,3 @@ def locations():
 #            detail=f"user with id: {user_id} does not exists"
 #        )
 #
-if __name__ == '__main__':
-    uvicorn.run("main:app", reload=True)
