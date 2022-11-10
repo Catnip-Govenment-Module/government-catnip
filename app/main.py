@@ -1,32 +1,16 @@
-#from typing import List
-#from uuid import UUID
+from typing import List
+import uvicorn
 from fastapi import FastAPI, HTTPException
-#from pymongo import MongoClient
+from pydantic import BaseModel
 
-#from models.models import Gender, Role, User
+from pymongo import MongoClient
 
 app = FastAPI()
 
-#client = MongoClient("mongodb://localhost:27017/")
-#db = client["GovernmentCatnip"]
-
-#db: List[User] = [
-#    User(
-#        id="31b6e462-4c9a-4d3d-a00a-e7a8fc43c4e7", 
-#        first_name="Jamila", 
-#        last_name="Ahmed",
-#        gender=Gender.female,
-#        roles=[Role.student]
-#    ),
-#    User(
-#        id="03dfb08b-faa6-47fc-b60c-3484a62f8b2a", 
-#        first_name="Alex", 
-#        last_name="Jones",
-#        gender=Gender.male,
-#        roles=[Role.admin, Role.user]
-#    )
-#]
-
+client = MongoClient("mongodb://localhost:27018/")
+db = client["GovernmentCatnip"]
+db_populations = db["population_information"]
+ 
 @app.get("/")
 async def root():
     return {
@@ -34,23 +18,32 @@ async def root():
         "link": "https://catnip-govenment-module.github.io/government-catnip"
     }
     
-#@app.get("/api/v1/users")
-#async def fetch_users():
-#    return db;
-#
-#@app.post("/api/v1/users")
-#async def register_user(user: User):
-#    db.append(user)
-#    return {"id": user.id}
-#
-#@app.delete("/api/v1/users/{user_id}")
-#async def delete_user(user_id: UUID):
-#        for user in db:
-#            if user.id == user_id:
-#                db.remove(user)
-#                return
-#        raise HTTPException(
-#            status_code=404,
-#            detail=f"user with id: {user_id} does not exists"
-#        )
-#
+class Population(BaseModel):
+    title: str
+    firstName: str
+    lastName: str
+    sex: str
+    citizenID: int
+    citizenCVV: str
+    locationID: int
+    rightToVote: bool
+    blacklist: bool
+    
+@app.get("/api/v1/populations", summary="Return all population with detail", response_model=List[Population])
+
+# async def population(results: Populations):
+#      try:
+#          db_election_result = results
+#          return {
+#              "status_code": 200
+#          }
+#      except:
+#          raise HTTPException(status_code=422, detail="Unprocessable Entity")
+
+def populations():
+    population = db_populations.find()
+    list_population = [l for l in population]
+    return list_population
+
+if __name__ == '__main__':
+    uvicorn.run("main:app", reload=True)
