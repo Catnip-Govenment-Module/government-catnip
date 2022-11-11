@@ -9,7 +9,7 @@ app = FastAPI()
 
 client = MongoClient("mongodb://localhost:27018/")
 db = client["GovernmentCatnip"]
-db_populations = db["population_information"]
+db_populations = db["personal_information"]
  
 @app.get("/")
 async def root():
@@ -19,15 +19,14 @@ async def root():
     }
     
 class Population(BaseModel):
+    _id: int
     title: str
     firstName: str
     lastName: str
     sex: str
-    citizenID: int
-    citizenCVV: str
     locationID: int
     rightToVote: bool
-    blacklist: bool
+    blackList: bool
     
 @app.get("/api/v1/populations", summary="Return all population with detail", response_model=List[Population])
 
