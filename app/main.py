@@ -1,15 +1,23 @@
 from typing import List
+# from uuid import UUID
 import uvicorn
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-
 from pymongo import MongoClient
+
+# from models.models import Gender, Role, User
 
 app = FastAPI()
 
-client = MongoClient("mongodb://localhost:27018/")
-db = client["GovernmentCatnip"]
+client = MongoClient(host="db")
+db = client["government_catnip"]
 db_populations = db["personal_information"]
+
+
+
+# client = MongoClient("mongodb://localhost:27018/")
+# db = client["GovernmentCatnip"]
+# db_populations = db["personal_information"]
  
 @app.get("/")
 async def root():
