@@ -25,6 +25,22 @@ class ElectionResult(BaseModel):
     nameOfParliament: str 
     nameOfParty: str
 
+@app.post("/api/v1/election-results")
+async def create_election_results(results: List[ElectionResult]):
+    result_list = []
+    for result in results:
+        new_result = collections.OrderedDict()
+        new_result['location_id'] = result.location_id
+        new_result['location'] = result.location
+        new_result['numberOfVotes'] = result.numberOfVotes
+        new_result['nameOfParliament'] = result.nameOfParliament
+        new_result['nameOfParty'] = result.nameOfParty
+        result_list.append(new_result)
+    db_election_result.insert_many(result_list)
+    return {
+        "status": 200
+    }
+
 # @app.post("/api/v1/election-result")
 # async def create_election_result(result: ElectionResult):
 #     db_election_result = {}
