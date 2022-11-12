@@ -1,5 +1,6 @@
 #from typing import List
 #from uuid import UUID
+import pprint
 from fastapi import FastAPI, HTTPException
 from pymongo import MongoClient
 
@@ -9,7 +10,7 @@ app = FastAPI()
 
 client = MongoClient(host="db")
 db = client["government_catnip"]
-
+db_cvv = db["personal_cvv"]
 #db: List[User] = [
 #    User(
 #        id="31b6e462-4c9a-4d3d-a00a-e7a8fc43c4e7", 
@@ -33,6 +34,13 @@ async def root():
         "message": "Sup for our documentation go to link variable",
         "link": "https://catnip-govenment-module.github.io/government-catnip"
     }
+
+@app.post("/api/v1/validate/{citizen_id}/{cvv}")
+async def check_cvv(citizen_id: int, cvv: str):
+    res = db_cvv.find_one({"_id": citizen_id, "cvv": cvv})
+    if res:
+        return {"validate": True}
+    return {"validate": False}
     
 #@app.get("/api/v1/users")
 #async def fetch_users():
