@@ -1,6 +1,5 @@
 #from typing import List
 #from uuid import UUID
-import pprint
 from fastapi import FastAPI, HTTPException
 from pymongo import MongoClient
 
@@ -27,7 +26,6 @@ db_cvv = db["personal_cvv"]
 #        roles=[Role.admin, Role.user]
 #    )
 #]
-
 @app.get("/")
 async def root():
     return {
