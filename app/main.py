@@ -29,16 +29,23 @@ class ElectionResult(BaseModel):
 async def create_election_results(results: List[ElectionResult]):
     result_list = []
     for result in results:
-        new_result = collections.OrderedDict()
-        new_result['location_id'] = result.location_id
-        new_result['location'] = result.location
-        new_result['numberOfVotes'] = result.numberOfVotes
-        new_result['nameOfParliament'] = result.nameOfParliament
-        new_result['nameOfParty'] = result.nameOfParty
-        result_list.append(new_result)
-    db_election_result.insert_many(result_list)
+        if db_election_result.aggregate([ {"$match": {"location_id": result.location_id}} ]):
+            pass
+        else:
+            new_result = collections.OrderedDict()
+            new_result['location_id'] = result.location_id
+            new_result['location'] = result.location
+            new_result['numberOfVotes'] = result.numberOfVotes
+            new_result['nameOfParliament'] = result.nameOfParliament
+            new_result['nameOfParty'] = result.nameOfParty
+            result_list.append(new_result)
+    if result_list != []:
+        db_election_result.insert_many(result_list)
+        return {
+            "status": 200
+        }
     return {
-        "status": 200
+        "message": "The results have already posted"
     }
 
 # @app.post("/api/v1/election-result")
