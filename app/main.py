@@ -1,12 +1,15 @@
+from typing import List
+# from uuid import UUID
 import uvicorn
 from fastapi import FastAPI, HTTPException
-from pymongo import MongoClient
-from typing import List
 from pydantic import BaseModel
+from pymongo import MongoClient
+
+# from models.models import Gender, Role, User
 
 app = FastAPI()
 
-client = MongoClient("mongodb://localhost:27018/")
+client = MongoClient(host="db")
 db = client["government_catnip"]
 db_populations = db["personal_information"]
 
@@ -31,11 +34,11 @@ class Population(BaseModel):
 class Population_p(BaseModel):
     detail: List[Population]
 
-@app.get("/api/v1/populations")
+@app.get("/api/v1/populations",description='populations information')
 async def all_pop():
     try:
         population = db_populations.find()
         list_population = [l for l in population]
         return list_population
     except:
-        raise HTTPException()
+        raise HTTPException(status_code=422)
