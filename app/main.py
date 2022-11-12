@@ -5,7 +5,6 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from pymongo import MongoClient
 
-
 app = FastAPI()
 
 client = MongoClient(host="db")
@@ -25,4 +24,6 @@ async def root():
 def locations():
     location = dbLocations.find()
     list_location = [l for l in location]
-    return list_location
+    if list_location:
+        return list_location
+    raise HTTPException(status_code=404, detail="No data in database")
