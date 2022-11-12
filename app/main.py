@@ -7,8 +7,25 @@ from pymongo import MongoClient
 
 app = FastAPI()
 
+# fake_election_db = [
+#     {
+#      "location": "Location 1",	#  เขตพื้นที่
+#      "location_id": 1, 
+#      "numberOfVoters": 150,  # จำนวนของคนที่มีสิทธิ์ Vote
+#      "nameOfParliament": "", # name of MP
+#      "nameOfParty": "",
+#     },
+# ]
+
+# fake_election_db = [
+
+# ]
+
 client = MongoClient(host="db")
 db = client["government_catnip"]
+db_election_result = db["election_result"]
+# db_election_result = fake_election_db
+
 
 #db: List[User] = [
 #    User(
@@ -34,6 +51,18 @@ async def root():
         "link": "https://catnip-govenment-module.github.io/government-catnip"
     }
     
+@app.get("/election-results")
+async def election_result():
+  if db_election_result.count() > 0:
+    election = db_election_result.find()
+    list_election_result = [i for i in election]
+    return list_election_result
+  else:
+    raise HTTPException(
+           status_code=404,
+           detail=f"The election results were empty."
+    )
+
 #@app.get("/api/v1/users")
 #async def fetch_users():
 #    return db;
