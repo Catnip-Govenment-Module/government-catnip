@@ -45,7 +45,7 @@ async def create_election_results(results: List[ElectionResult]):
             "status": 200
         }
     return {
-        "message": "The results have already posted"
+        "message": "The request is either have no data or is already in the database"
     }
 
 # @app.post("/api/v1/election-result")
