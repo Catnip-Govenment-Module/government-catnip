@@ -12,6 +12,13 @@ db = client["government_catnip"]
 dbLocations = db["location_information"]
 
 
+async def check_connection_mongodb():
+    try:
+        client.server_info()
+    except Exception:
+        raise HTTPException(status_code=500, detail=f"Unable to connect to the server")
+
+
 @app.get("/")
 async def root():
     return {
@@ -21,7 +28,8 @@ async def root():
 
 
 @app.get("/api/v1/locations", summary="Return all location with detail")
-def locations():
+async def locations():
+    await check_connection_mongodb()
     location = dbLocations.find()
     list_location = [l for l in location]
     if list_location:
