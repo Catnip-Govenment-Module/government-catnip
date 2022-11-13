@@ -22,7 +22,7 @@ def test_post_form_no_body(client):
     response = client.post("/api/v1/election-results")
     assert response.status_code == 422
 
-def test_post_election_result_pass_request(client):
+def test_post_election_result(client):
     data = [
             {
                 "location_id": 1,
@@ -43,5 +43,12 @@ def test_post_election_result_pass_request(client):
     response = client.post(
         "/api/v1/election-results",
         json=data
+    )
+    assert response.status_code == 200
+
+def test_post_empty_list(client):
+    response = client.post(
+        "/api/v1/election-results",
+        json=[]
     )
     assert response.status_code == 200
