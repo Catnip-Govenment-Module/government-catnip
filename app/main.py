@@ -47,12 +47,3 @@ async def create_election_results(results: List[ElectionResult]):
     return {
         "message": "The request is either have no data or is already in the database"
     }
-
-# @app.post("/api/v1/election-result")
-# async def create_election_result(result: ElectionResult):
-#     db_election_result = {}
-#     location_id = result.location_id
-#     db_election_result[location_id] = result.dict()
-#     return {
-#         "status": 200
-#         }
