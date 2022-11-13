@@ -10,22 +10,13 @@ app = FastAPI()
 client = MongoClient(host="db")
 db = client["government_catnip"]
 db_cvv = db["personal_cvv"]
-#db: List[User] = [
-#    User(
-#        id="31b6e462-4c9a-4d3d-a00a-e7a8fc43c4e7", 
-#        first_name="Jamila", 
-#        last_name="Ahmed",
-#        gender=Gender.female,
-#        roles=[Role.student]
-#    ),
-#    User(
-#        id="03dfb08b-faa6-47fc-b60c-3484a62f8b2a", 
-#        first_name="Alex", 
-#        last_name="Jones",
-#        gender=Gender.male,
-#        roles=[Role.admin, Role.user]
-#    )
-#]
+
+async def check_connection_mongodb():
+    try:
+        client.server_info()
+    except Exception:
+        raise HTTPException(status_code=500, detail=f"Unable to connect to the server")
+
 @app.get("/")
 async def root():
     return {
@@ -35,28 +26,13 @@ async def root():
 
 @app.post("/api/v1/validate/{citizen_id}/{cvv}")
 async def check_cvv(citizen_id: int, cvv: str):
-    res = db_cvv.find_one({"_id": citizen_id, "cvv": cvv})
-    if res:
-        return {"validate": True}
+    ID_LENGTH = 13
+    CVV_LENGTH = 64
+    if len(str(citizen_id)) > ID_LENGTH or len(cvv) > CVV_LENGTH:
+        return {"validate": False}
+    user = db_cvv.find_one({"_id": citizen_id})
+    if user:
+        get_cvv = db_cvv.find_one({"_id": citizen_id, "cvv": cvv})
+        if get_cvv:
+            return {"validate": True}
     return {"validate": False}
-    
-#@app.get("/api/v1/users")
-#async def fetch_users():
-#    return db;
-#
-#@app.post("/api/v1/users")
-#async def register_user(user: User):
-#    db.append(user)
-#    return {"id": user.id}
-#
-#@app.delete("/api/v1/users/{user_id}")
-#async def delete_user(user_id: UUID):
-#        for user in db:
-#            if user.id == user_id:
-#                db.remove(user)
-#                return
-#        raise HTTPException(
-#            status_code=404,
-#            detail=f"user with id: {user_id} does not exists"
-#        )
-#
