@@ -9,7 +9,7 @@ services:
     environment:
       MONGO_INITDB_DATABASE: government_catnip
     ports:
-      - "27017:27017"
+      - "27018:27017"
     volumes:
       - ./database/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 #      - ./init-mongodb/data:/tmp/data — contains a JSON file with an array
@@ -22,4 +22,4 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - ./app:/code/app
+      - ./:/src/app/
