@@ -32,10 +32,17 @@ async def root():
     }
 
 
-@app.get("/api/v1/locations", summary="Return all location with detail")
+class Location(BaseModel):
+    location_id: int
+    location: str
+    population: int
+    numberOfVoters: int
+
+
+@app.get("/api/v1/locations", summary="Return all location with detail", response_model=List[Location])
 async def locations(db: Database = Depends(get_db)):
     dbLocations = db["location_information"]
-    location = dbLocations.find()
+    location = dbLocations.find({}, {"_id": 0})
     list_location = [l for l in location]
     if list_location:
         return list_location
