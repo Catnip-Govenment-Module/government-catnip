@@ -1,10 +1,9 @@
 from typing import List
-# from uuid import UUID
-import uvicorn
 from fastapi import FastAPI, HTTPException, Depends
-from pydantic import BaseModel
 from pymongo import MongoClient
 from pymongo.database import Database
+
+from app.models.location import Location
 
 app = FastAPI()
 
@@ -30,13 +29,6 @@ async def root():
         "message": "Sup for our documentation go to link variable",
         "link": "https://catnip-govenment-module.github.io/government-catnip"
     }
-
-
-class Location(BaseModel):
-    location_id: int
-    location: str
-    population: int
-    numberOfVoters: int
 
 
 @app.get("/api/v1/locations", summary="Return all location with detail", response_model=List[Location])
