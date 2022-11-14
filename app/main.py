@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pymongo import MongoClient
 from typing import List
 from pydantic import BaseModel
@@ -41,9 +41,5 @@ async def create_election_results(results: List[ElectionResult]):
             result_list.append(new_result)
     if result_list != []:
         db_election_result.insert_many(result_list)
-        return {
-            "status": 200
-        }
-    return {
-        "message": "The request is either have no data or is already in the database"
-    }
+        return result_list
+    return HTTPException(status_code=404, detail="No data")
