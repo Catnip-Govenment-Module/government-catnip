@@ -34,10 +34,9 @@ async def root():
 
 @app.get("/api/v1/locations", summary="Return all location with detail")
 async def locations(db: Database = Depends(get_db)):
-    # await check_connection_mongodb()
     dbLocations = db["location_information"]
     location = dbLocations.find()
     list_location = [l for l in location]
     if list_location:
         return list_location
-    raise HTTPException(status_code=404, detail="No data in database")
+    raise HTTPException(status_code=404, detail="No data")
