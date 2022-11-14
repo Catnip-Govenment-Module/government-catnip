@@ -1,13 +1,8 @@
-from fastapi.testclient import TestClient
-from app.main import app
-
-client = TestClient(app)
-
-def test_population_endpoint():
+def test_population_endpoint(client):
     response = client.get("/api/v1/populations")
     assert response.status_code == 200
 
-def test_invalid_id1():
+def test_invalid_id1(client):
     response = client.get("/fruit/99")
     assert response.status_code == 404
     
