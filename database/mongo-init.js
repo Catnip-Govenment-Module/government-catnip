@@ -73,3 +73,29 @@ db.district.insertMany([
         "region": "Centre"
     }
 ])
+
+/// For testing the election results
+
+// db.election_result.insertMany([
+//             {
+//                 "_id": "1",
+//                 "district": "Amphawa", // District
+//                 "districtTH": "อัมพวา", // District in Thai language
+//                 "province": "Samut Songkhram", // Province
+//                 "provinceTH": "สมุทรปราการ", // Province in Thai language
+//                 "region": "centre", // Region
+//                 "nameOfParliament": "Jakarin Chujan", // Parliament name
+//                 "nameOfParty": "Catnip" // Party that parliament are with
+//             },
+//             {
+//                 "_id": "2",
+//                 "district": "Bang Len",
+//                 "districtTH": "บางเลน",
+//                 "province": "Phichit",
+//                 "provinceTH": "พิจิตร",
+//                 "region": "centre",
+//                 "nameOfParliament": "Chananya Photan",
+//                 "nameOfParty": "Catnip"
+//             },
+//         ]
+// )
