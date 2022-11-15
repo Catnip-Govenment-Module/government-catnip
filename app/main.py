@@ -5,7 +5,7 @@ from pymongo.database import Database
 import collections
 
 from app.models.location import Location
-from app.models.election_result import ElectionResultxs
+from app.models.election_result import ElectionResult
 
 app = FastAPI()
 
