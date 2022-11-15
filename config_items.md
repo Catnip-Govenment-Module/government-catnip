@@ -16,7 +16,7 @@ Dev (all of us) can access all documents and code. but change need to be approve
 
 
 ## Gantt Chart
-![GanttChart](image/gatt.jpg)
+![GanttChart](image/gantt.jpg)
 
 
 ## PERT Diagram
