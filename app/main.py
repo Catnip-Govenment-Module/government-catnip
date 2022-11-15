@@ -32,6 +32,7 @@ async def root():
         "link": "https://catnip-govenment-module.github.io/government-catnip"
     }
 
+
 @app.get("/api/v1/locations", summary="Return all location with detail", response_model=List[Location])
 async def locations(db: Database = Depends(get_db)):
     dbLocations = db["location_information"]
@@ -41,13 +42,12 @@ async def locations(db: Database = Depends(get_db)):
         return list_location
     raise HTTPException(status_code=404, detail="No data")
 
-@app.get("/api/v1/populations",description='populations information', response_model=List[Population])
+
+@app.get("/api/v1/populations", description='populations information', response_model=List[Population])
 async def all_population_info(db: Database = Depends(get_db)):
-    try:
-        dbpopulation = db["personal_information"]
-        populations = dbpopulation.find({},{"_id":0})
-        list_population = [l for l in populations]
-        if list_population:
-            return list_population
-    except:
-        raise HTTPException(status_code=404, detail="No data")
+    dbpopulation = db["personal_information"]
+    populations = dbpopulation.find({}, {"_id": 0})
+    list_population = [l for l in populations]
+    if list_population:
+        return list_population
+    raise HTTPException(status_code=404, detail="No data")
