@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-import pytest
-from fastapi.testclient import TestClient
-from app.main import app
-
-
-@pytest.fixture(scope="module")
-def client():
-    yield TestClient(app)
-=======
 import mongomock
 import pytest
 from fastapi.testclient import TestClient
@@ -44,9 +34,3 @@ def mock_mongo(db_location):
 @pytest.fixture()
 def db_location():
     yield db["location_information"]
-
-
-@pytest.fixture()
-def client():
-    yield TestClient(app)
->>>>>>> main

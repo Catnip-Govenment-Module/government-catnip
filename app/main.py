@@ -1,9 +1,11 @@
-#from typing import List
-#from uuid import UUID
-from fastapi import FastAPI, HTTPException
-#from pymongo import MongoClient
+from typing import List
+from fastapi import FastAPI, HTTPException, Depends
+from pymongo import MongoClient
+from pymongo.database import Database
+import collections
 
-#from models.models import Gender, Role, User
+from app.models.location import Location
+from app.models.election_result import ElectionResult
 
 app = FastAPI()
 
@@ -30,19 +32,14 @@ async def root():
         "link": "https://catnip-govenment-module.github.io/government-catnip"
     }
 
-
-class Population(BaseModel):
-    _id: int
-    title: str
-    firstName: str
-    lastName: str
-    sex: str
-    locationID: int
-    rightToVote: bool
-    blackList: bool
-
-class Population_p(BaseModel):
-    detail: List[Population]
+@app.get("/api/v1/locations", summary="Return all location with detail", response_model=List[Location])
+async def locations(db: Database = Depends(get_db)):
+    dbLocations = db["location_information"]
+    location = dbLocations.find({}, {"_id": 0})
+    list_location = [l for l in location]
+    if list_location:
+        return list_location
+    raise HTTPException(status_code=404, detail="No data")
 
 @app.get("/api/v1/populations",description='populations information')
 async def all_pop():
