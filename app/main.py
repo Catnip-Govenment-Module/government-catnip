@@ -1,17 +1,27 @@
-from typing import List
-# from uuid import UUID
-import uvicorn
+#from typing import List
+#from uuid import UUID
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from pymongo import MongoClient
+#from pymongo import MongoClient
 
-# from models.models import Gender, Role, User
+#from models.models import Gender, Role, User
 
 app = FastAPI()
 
-client = MongoClient(host="db")
-db = client["government_catnip"]
-db_populations = db["personal_information"]
+
+async def get_db():
+    client = await check_connect_mongodb()
+    db = client["government_catnip"]
+    return db
+
+
+async def check_connect_mongodb():
+    try:
+        client = MongoClient(host="db")
+        client.server_info()
+    except Exception:
+        raise HTTPException(status_code=500, detail=f"Unable to connect to the server")
+    return client
+
 
 @app.get("/")
 async def root():
