@@ -40,7 +40,7 @@ async def create_election_results(results: List[ElectionResult], db: Database = 
     if result_list:
         db_election_result.insert_many(result_list)
         return {"detail": "Complete"}
-    return {"detail": "No data"}
+    return {"detail": "Empty list"}
 
 
 @app.get("/api/v1/locations", summary="Return all location with detail", response_model=List[Location])

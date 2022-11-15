@@ -46,6 +46,7 @@ def test_post_election_result(mock_mongo, client):
         json=data
     )
     assert response.status_code == 200
+    assert response.json() == {"detail": "Complete"}
 
 def test_post_empty_list(mock_mongo, client):
     response = client.post(
@@ -53,3 +54,4 @@ def test_post_empty_list(mock_mongo, client):
         json=[]
     )
     assert response.status_code == 200
+    assert response.json() == {'detail': 'Empty list'}
