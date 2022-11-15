@@ -1,16 +1,31 @@
-def test_get_location(mock_mongo, client):
-    response = client.get("/api/v1/locations")
-    assert response.status_code == 200
-    assert response.json() == [
+def test_get_location(mock_mongo, client, db_location):
+    mock_location = [
         {
-            "location_id": 1,
             "location": "Amphawa",
+            "location_id": 1,
             "population": 10000,
             "numberOfVoters": 9995
         },
         {
-            "location_id": 2,
             "location": "Bang Len",
+            "location_id": 2,
+            "population": 20000,
+            "numberOfVoters": 18995
+        }
+    ]
+    db_location.insert_many(mock_location)
+    response = client.get("/api/v1/locations")
+    assert response.status_code == 200
+    assert response.json() == [
+        {
+            "location": "Amphawa",
+            "location_id": 1,
+            "population": 10000,
+            "numberOfVoters": 9995
+        },
+        {
+            "location": "Bang Len",
+            "location_id": 2,
             "population": 20000,
             "numberOfVoters": 18995
         }

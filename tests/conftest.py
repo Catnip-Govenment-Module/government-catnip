@@ -9,22 +9,6 @@ db = mongo_client["government_catnip"]
 
 @pytest.fixture()
 def mock_mongo(db_location):
-    mock_location = [
-        {
-            "location_id": 1,
-            "location": "Amphawa",
-            "population": 10000,
-            "numberOfVoters": 9995
-        },
-        {
-            "location_id": 2,
-            "location": "Bang Len",
-            "population": 20000,
-            "numberOfVoters": 18995
-        }
-    ]
-    db_location.insert_many(mock_location)
-
     def fake_db():
         return db
 
