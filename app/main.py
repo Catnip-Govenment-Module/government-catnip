@@ -2,7 +2,7 @@ from typing import List
 from fastapi import FastAPI, HTTPException, Depends
 from pymongo import MongoClient
 from pymongo.database import Database
-import collections
+from fastapi.encoders import jsonable_encoder
 
 from app.models.location import Location
 from app.models.election_result import ElectionResult
@@ -32,25 +32,16 @@ async def root():
         "link": "https://catnip-govenment-module.github.io/government-catnip"
     }
 
+
 @app.post("/api/v1/election-results")
 async def create_election_results(results: List[ElectionResult], db: Database = Depends(get_db)):
     db_election_result = db["election_result"]
-    result_list = []
-    for result in results:
-        if db_election_result.aggregate([ {"$match": {"location_id": result.location_id}} ]):
-            pass
-        else:
-            new_result = collections.OrderedDict()
-            new_result['location_id'] = result.location_id
-            new_result['location'] = result.location
-            new_result['numberOfVotes'] = result.numberOfVotes
-            new_result['nameOfParliament'] = result.nameOfParliament
-            new_result['nameOfParty'] = result.nameOfParty
-            result_list.append(new_result)
-    if result_list != []:
+    result_list = jsonable_encoder(results)
+    if result_list:
         db_election_result.insert_many(result_list)
-        return result_list
-    return HTTPException(status_code=404, detail="No data")
+        return {"detail": "Complete"}
+    return {"detail": "No data"}
+
 
 @app.get("/api/v1/locations", summary="Return all location with detail", response_model=List[Location])
 async def locations(db: Database = Depends(get_db)):
