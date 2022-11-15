@@ -1,4 +1,4 @@
-def test_get_location(mock_mongo, client):
+def test_get_location(mock_mongo, client, db_location):
     response = client.get("/api/v1/locations")
     assert response.status_code == 200
     assert response.json() == [

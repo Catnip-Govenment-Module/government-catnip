@@ -45,7 +45,7 @@ async def locations(db: Database = Depends(get_db)):
 async def all_population_info(db: Database = Depends(get_db)):
     try:
         dbpopulation = db["personal_information"]
-        populations = dbpopulation.find()
+        populations = dbpopulation.find({},{"_id":0})
         list_population = [l for l in populations]
         if list_population:
             return list_population
