@@ -6,6 +6,8 @@ from fastapi.encoders import jsonable_encoder
 
 from app.models.location import Location
 from app.models.election_result import ElectionResult
+from app.models.population import Population
+
 
 app = FastAPI()
 
@@ -50,4 +52,14 @@ async def locations(db: Database = Depends(get_db)):
     list_location = [l for l in location]
     if list_location:
         return list_location
+    raise HTTPException(status_code=404, detail="No data")
+
+
+@app.get("/api/v1/populations", description='populations information', response_model=List[Population])
+async def all_population_info(db: Database = Depends(get_db)):
+    dbpopulation = db["personal_information"]
+    populations = dbpopulation.find({}, {"_id": 0})
+    list_population = [l for l in populations]
+    if list_population:
+        return list_population
     raise HTTPException(status_code=404, detail="No data")
