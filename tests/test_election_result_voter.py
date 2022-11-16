@@ -1,21 +1,20 @@
-def test_get_election_result(mock_mongo, mock_election_result, client):
+def test_get_election_result(mock_mongo, client):
     test_get_election_result = [
         {
             "location_id": 1,
-            "location": "Bang Len",
-            "numberOfVoters": 200,
-            "nameOfParliament": "Chananya Photan", 
+            "location": "Amphawa",
+            "numberOfVoters": 9900,
+            "nameOfParliament": "Jakarin Chujan", 
             "nameOfParty": "Catnip"
         },
         {
             "location_id": 2,
-            "location": "Amphawa",
-            "numberOfVoters": 200,
-            "nameOfParliament": "Jakarin Chujan", 
+            "location": "Bang Len",
+            "numberOfVoters": 9900,
+            "nameOfParliament": "Chananya Photan", 
             "nameOfParty": "Catnip"
         }
     ]
-
 
     response = client.get("/api/v1/election-results")
     assert response.status_code == 200
