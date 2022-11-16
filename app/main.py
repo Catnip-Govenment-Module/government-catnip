@@ -1,12 +1,20 @@
-#from typing import List
-#from uuid import UUID
-from fastapi import FastAPI, HTTPException
+from typing import List
+from fastapi import FastAPI, HTTPException, Depends
 from pymongo import MongoClient
+
 from passlib.context import CryptContext
 
-#from models.models import Gender, Role, User
+from pymongo.database import Database
+from fastapi.encoders import jsonable_encoder
+
+from app.models.location import Location
+from app.models.election_result import ElectionResult
+from app.models.population import Population
+
+
 
 app = FastAPI()
+
 
 client = MongoClient(host="db")
 db = client["government_catnip"]
@@ -18,12 +26,14 @@ async def check_connection_mongodb():
     except Exception:
         raise HTTPException(status_code=500, detail=f"Unable to connect to the server")
 
+
 @app.get("/")
 async def root():
     return {
         "message": "Sup for our documentation go to link variable",
         "link": "https://catnip-govenment-module.github.io/government-catnip"
     }
+
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -48,3 +58,33 @@ async def check_cvv(citizen_id: int, cvv: str):
     if not user:
         return False
     return True
+
+@app.post("/api/v1/election-results")
+async def create_election_results(results: List[ElectionResult], db: Database = Depends(get_db)):
+    db_election_result = db["election_result"]
+    result_list = jsonable_encoder(results)
+    if result_list:
+        db_election_result.insert_many(result_list)
+        return {"detail": "Complete"}
+    return {"detail": "Empty list"}
+
+
+@app.get("/api/v1/locations", summary="Return all location with detail", response_model=List[Location])
+async def locations(db: Database = Depends(get_db)):
+    dbLocations = db["location_information"]
+    location = dbLocations.find({}, {"_id": 0})
+    list_location = [l for l in location]
+    if list_location:
+        return list_location
+    raise HTTPException(status_code=404, detail="No data")
+
+
+@app.get("/api/v1/populations", description='populations information', response_model=List[Population])
+async def all_population_info(db: Database = Depends(get_db)):
+    dbpopulation = db["personal_information"]
+    populations = dbpopulation.find({}, {"_id": 0})
+    list_population = [l for l in populations]
+    if list_population:
+        return list_population
+    raise HTTPException(status_code=404, detail="No data")
+

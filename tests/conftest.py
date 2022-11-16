@@ -71,3 +71,4 @@ def mock_population(db_population):
 @pytest.fixture()
 def client():
     yield TestClient(app)
+
