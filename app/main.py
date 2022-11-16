@@ -2,7 +2,6 @@ from typing import List
 from fastapi import FastAPI, HTTPException, Depends
 from pymongo import MongoClient
 from pymongo.database import Database
-import collections
 from fastapi.encoders import jsonable_encoder
 
 from app.models.location import Location
