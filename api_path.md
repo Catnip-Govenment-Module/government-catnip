@@ -12,7 +12,7 @@ Get the population data
 {
     [
         {
-            "_id": 1234567898765, // Citizen ID
+            "citizen_id": 1234567898765, // Citizen ID
             "title": "Ms.", // Person's title
             "firstName": "Achara", // First name
             "lastName": "Sukkasem", // Last name
@@ -22,7 +22,7 @@ Get the population data
             "blackList": False // The person have a right to be MP or not
         },
         {
-            "_id": 4569871354123,
+            "citizen_id": 4569871354123,
             "title": "Mr.",
             "firstName": "Anuman",
             "lastName": "Saengthong",
@@ -88,7 +88,7 @@ For get detailed election data of all location.
             "district": "Bang Len",
             "districtTH": "บางเลน",
             "province": "Phichit",
-            "provinceTH": "พิจิตร"
+            "provinceTH": "พิจิตร",
             "region": "centre",
             "nameOfParliament": "Chananya Photan",
             "nameOfParty": "Catnip"
@@ -114,7 +114,7 @@ To update the election detail.
         {
             "location_id": 1, // ID of location
             "location": "Amphawa", // Location
-            "numberOfVotes": 9900,// The current amount of votes
+            "numberOfVoters": 9900,// The current amount of votes
             "nameOfParliament": "Jakarin Chujan", // Parliament name
             "nameOfParty": "Catnip" // Party that parliament are with
             
@@ -122,10 +122,10 @@ To update the election detail.
         {
             "location_id": 2,
             "location": "Bang Len",
-            "numberOfVotes": 9900,
+            "numberOfVoters": 9900,
             "nameOfParliament": "Chananya Photan", 
             "nameOfParty": "Catnip"
-        }
+        },
         .
         .
         .

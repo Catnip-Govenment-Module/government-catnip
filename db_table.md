@@ -4,7 +4,7 @@
 
 ```js
 {
-     "_id": number,
+     "citizen_id": number,
      "title": string,
      "firstName": string,
      "lastName": string,
@@ -14,7 +14,7 @@
      "blackList": boolean
 }
 ```
-### _id
+### citizen_id
 The person's citizen identification number
 
 ### title
@@ -42,12 +42,12 @@ a person's eligibility to register to be a member of parliament in an election
 
 ```js
 {
-     "_id": number,
+     "citizen_id": number,
      "citizenCVV": hash
 }
 ```
 
-### _id
+### citizen_id
 The person's citizen identification number
 
 ### citizenCVV
@@ -57,18 +57,18 @@ The person's citizen identification card verification value number
 
 ```js
 {
-     "_id": number, 
+     "location_id": number, 
      "location": string,
      "population": number,
      "numberOfVoters": number
 }
 ```
 
-### _id
-It's the id of District
+### location_id
+It's the id of location
 
 ### location
-It's the name of District
+It's the name of location
 
 ### population
 It's the number of population in this location
@@ -80,18 +80,17 @@ It's the number of people that have a right to vote in this location
 
 ```js
 {
-     "_id" : number,
+     "location_id" : number,
      "memberID": number,
      "nameOfParliament": string,
      "nameOfParty": string,
-     "numberOfVotes": number,
-     "lastUpdatedTime": string
+     "numberOfVoters": number,
 }
      
 ```
 
-### _id
-ID of district
+### location_id
+ID of location_id
 
 ### memberID
 ID of member of parliament in location
@@ -102,17 +101,15 @@ The name of member of parliament in location
 ### nameOfParty
 The name of the party that member of parliament are work for
 
-### numberOfVotes
+### numberOfVoters
 Amount of population have been voted in this location
 
-### lastUpdatedTime
-Last time data have been updated 
 
 ## district
 
 ```js
 {
-     "_id": string,
+     "district_id": string,
      "district": string,
      "districtTH": string,
      "province": string,
@@ -121,7 +118,7 @@ Last time data have been updated
 }
 ```
 
-### _id
+### district_id
 ID of district
 
 ### district
