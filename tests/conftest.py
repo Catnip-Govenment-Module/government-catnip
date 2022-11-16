@@ -17,26 +17,26 @@ def mock_mongo():
 
 @pytest.fixture()
 def db_location():
-     yield db["location_information"]
+    yield db["location_information"]
+
 
 @pytest.fixture()
 def mock_location(db_location):
     list_mock_location = [
         {
-            "location": "Amphawa",
             "location_id": 1,
+            "location": "Amphawa",
             "population": 10000,
             "numberOfVoters": 9995
-        },
+         },
         {
-            "location": "Bang Len",
             "location_id": 2,
+            "location": "Bang Len",
             "population": 20000,
             "numberOfVoters": 18995
         }
     ]
     db_location.insert_many(list_mock_location)
-
 
 
 @pytest.fixture()
