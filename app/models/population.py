@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 class Population(BaseModel):
-    _id: int
+    citizen_id: int
     title: str
     firstName: str
     lastName: str
