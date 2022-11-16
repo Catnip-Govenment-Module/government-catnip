@@ -66,5 +66,24 @@ def mock_population(db_population):
 
 
 @pytest.fixture()
+def mock_location(db_location):
+    list_mock_location = [
+        {
+            "location_id": 1,
+            "location": "Amphawa",
+            "population": 10000,
+            "numberOfVoters": 9995
+         },
+        {
+            "location_id": 2,
+            "location": "Bang Len",
+            "population": 20000,
+            "numberOfVoters": 18995
+        }
+    ]
+    db_location.insert_many(list_mock_location)
+
+
+@pytest.fixture()
 def client():
     yield TestClient(app)

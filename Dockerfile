@@ -8,4 +8,7 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 COPY ./app /code/app
 
+# Export the container port for outsider to connect.
+EXPOSE 80
+
 CMD ["uvicorn", "app.main:app","--reload", "--host", "0.0.0.0", "--port", "80"]
