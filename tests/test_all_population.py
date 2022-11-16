@@ -30,7 +30,3 @@ def test_get_all_population_but_not_data(mock_mongo, client, db_population):
     response = client.get("/api/v1/populations")
     assert response.status_code == 404
     assert response.json() == test_get_population_no_data
-    
-def test_get_invalid_part(mock_mongo, client):
-    response = client.get("/api/v1/meow")
-    assert response.status_code == 404
