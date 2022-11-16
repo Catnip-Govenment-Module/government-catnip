@@ -1,34 +1,31 @@
-#from typing import List
-#from uuid import UUID
-from fastapi import FastAPI, HTTPException
+from typing import List
+from fastapi import FastAPI, HTTPException, Depends
 from pymongo import MongoClient
+from pymongo.database import Database
+from fastapi.encoders import jsonable_encoder
 
-#from models.models import Gender, Role, User
+from app.models.location import Location
+from app.models.election_result import ElectionResult
+from app.models.population import Population
+
 
 app = FastAPI()
 
-client = MongoClient(host="db")
-db = client["government_catnip"]
-db_election_result = db["election_result"]
-# db_election_result = fake_election_db
+
+async def get_db():
+    client = await check_connect_mongodb()
+    db = client["government_catnip"]
+    return db
 
 
-#db: List[User] = [
-#    User(
-#        id="31b6e462-4c9a-4d3d-a00a-e7a8fc43c4e7", 
-#        first_name="Jamila", 
-#        last_name="Ahmed",
-#        gender=Gender.female,
-#        roles=[Role.student]
-#    ),
-#    User(
-#        id="03dfb08b-faa6-47fc-b60c-3484a62f8b2a", 
-#        first_name="Alex", 
-#        last_name="Jones",
-#        gender=Gender.male,
-#        roles=[Role.admin, Role.user]
-#    )
-#]
+async def check_connect_mongodb():
+    try:
+        client = MongoClient(host="db")
+        client.server_info()
+    except Exception:
+        raise HTTPException(status_code=500, detail=f"Unable to connect to the server")
+    return client
+
 
 @app.get("/")
 async def root():
@@ -37,34 +34,41 @@ async def root():
         "link": "https://catnip-govenment-module.github.io/government-catnip"
     }
     
-@app.get("/api/v1/election-results")
-async def election_result():
+@app.get("/api/v1/election-results", summary="Return the election results", response_model=List[ElectionResult])
+async def election_result(db: Database = Depends(get_db)):
+  db_election_result = db["election_result"]
   if db_election_result.count_documents({}) > 0:
-    election = db_election_result.find()
+    election = db_election_result.find({}, {"_id": 0})
     list_election_result = [e for e in election]
     return list_election_result
-  raise HTTPException(
-           status_code=404,
-           detail=f"The election results were empty."
-  )
+  raise HTTPException(status_code=404, detail=f"No data")
 
-#@app.get("/api/v1/users")
-#async def fetch_users():
-#    return db;
-#
-#@app.post("/api/v1/users")
-#async def register_user(user: User):
-#    db.append(user)
-#    return {"id": user.id}
-#
-#@app.delete("/api/v1/users/{user_id}")
-#async def delete_user(user_id: UUID):
-#        for user in db:
-#            if user.id == user_id:
-#                db.remove(user)
-#                return
-#        raise HTTPException(
-#            status_code=404,
-#            detail=f"user with id: {user_id} does not exists"
-#        )
-#
+@app.post("/api/v1/election-results")
+async def create_election_results(results: List[ElectionResult], db: Database = Depends(get_db)):
+    db_election_result = db["election_result"]
+    result_list = jsonable_encoder(results)
+    if result_list:
+        db_election_result.insert_many(result_list)
+        return {"detail": "Complete"}
+    return {"detail": "Empty list"}
+
+
+@app.get("/api/v1/locations", summary="Return all location with detail", response_model=List[Location])
+async def locations(db: Database = Depends(get_db)):
+    dbLocations = db["location_information"]
+    location = dbLocations.find({}, {"_id": 0})
+    list_location = [l for l in location]
+    if list_location:
+        return list_location
+    raise HTTPException(status_code=404, detail="No data")
+
+
+@app.get("/api/v1/populations", description='populations information', response_model=List[Population])
+async def all_population_info(db: Database = Depends(get_db)):
+    dbpopulation = db["personal_information"]
+    populations = dbpopulation.find({}, {"_id": 0})
+    list_population = [l for l in populations]
+    if list_population:
+        return list_population
+    raise HTTPException(status_code=404, detail="No data")
+
