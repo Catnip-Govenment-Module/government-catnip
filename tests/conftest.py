@@ -67,6 +67,28 @@ def mock_population(db_population):
             "blackList": False
         }])
 
+@pytest.fixture()
+def db_election_result():
+    yield db["election_result"]
+
+@pytest.fixture()
+def mock_election_result(db_election_result):
+    db_election_result.insertMany([
+        {
+            "location_id": 1,
+            "location": "Bang Len",
+            "numberOfVoters": 200,
+            "nameOfParliament": "Chananya Photan", 
+            "nameOfParty": "Catnip"
+        },
+        {
+            "location_id": 2,
+            "location": "Amphawa",
+            "numberOfVoters": 200,
+            "nameOfParliament": "Jakarin Chujan", 
+            "nameOfParty": "Catnip"
+        }
+    ])
 
 @pytest.fixture()
 def client():
