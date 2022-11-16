@@ -2,6 +2,7 @@
 #from uuid import UUID
 from fastapi import FastAPI, HTTPException
 from pymongo import MongoClient
+from passlib.context import CryptContext
 
 #from models.models import Gender, Role, User
 
@@ -24,15 +25,26 @@ async def root():
         "link": "https://catnip-govenment-module.github.io/government-catnip"
     }
 
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+def verify_password(plain_password, hashed_password):
+    return pwd_context.verify(plain_password, hashed_password)
+
+def get_password_hash(password):
+    return pwd_context.hash(password)
+
+def authenticate_user(collection_users, citizen_id: str, password: str):
+    user = collection_users.find_one({"_id": citizen_id}, {"cvv": 1})
+    if not user:
+        return False
+    if not verify_password(password, user["cvv"]):
+        return False
+    return user
+
 @app.post("/api/v1/validate/{citizen_id}/{cvv}")
 async def check_cvv(citizen_id: int, cvv: str):
-    ID_LENGTH = 13
-    CVV_LENGTH = 64
-    if len(str(citizen_id)) > ID_LENGTH or len(cvv) > CVV_LENGTH:
-        return {"validate": False}
-    user = db_cvv.find_one({"_id": citizen_id})
-    if user:
-        get_cvv = db_cvv.find_one({"_id": citizen_id, "cvv": cvv})
-        if get_cvv:
-            return {"validate": True}
-    return {"validate": False}
+    """with given 2 parameters citizen_id and cvv."""
+    user = authenticate_user(db_cvv, citizen_id, cvv)
+    if not user:
+        return False
+    return True
