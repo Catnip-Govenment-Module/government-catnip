@@ -99,3 +99,4 @@ def mock_district(db_district):
 @pytest.fixture()
 def client():
     yield TestClient(app)
+
