@@ -51,7 +51,8 @@ def authenticate_user(collection_users, citizen_id: str, password: str):
         return False
     return user
 
-@app.post("/api/v1/validate/{citizen_id}/{cvv}")
+@app.post("/{parameter}")
+def simple(parameter: BaseModel, permission: bool = Depends(verify_password)):
 async def check_cvv(citizen_id: int, cvv: str):
     """with given 2 parameters citizen_id and cvv."""
     user = authenticate_user(db_cvv, citizen_id, cvv)
