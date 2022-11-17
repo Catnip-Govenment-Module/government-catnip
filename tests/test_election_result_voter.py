@@ -1,16 +1,20 @@
-def test_get_election_result(mock_mongo, client):
+def test_get_election_result(mock_mongo, mock_district, client):
     test_get_election_result = [
         {
-            "location_id": 1,
-            "location": "Amphawa",
-            "numberOfVoters": 9900,
+            "district": "Amphawa",
+            "districtTH": "อัมพวา", 
+            "province": "Samut Songkhram", 
+            "provinceTH": "สมุทรสงคราม", 
+            "region": "Centre", 
             "nameOfParliament": "Jakarin Chujan", 
             "nameOfParty": "Catnip"
         },
         {
-            "location_id": 2,
-            "location": "Bang Len",
-            "numberOfVoters": 9900,
+            "district": "Bang Len",
+            "districtTH": "บางเลน",
+            "province": "Nakhon Pathom",
+            "provinceTH": "นครปฐม",
+            "region": "Centre",
             "nameOfParliament": "Chananya Photan", 
             "nameOfParty": "Catnip"
         }
