@@ -73,30 +73,3 @@ db.district.insertMany([
         "region": "Centre"
     }
 ])
-
-/// For testing the election results
-
-db.election_result.insertMany([
-    {
-        "location_id": 1, // ID of location
-        "location": "Amphawa", // Location
-        "numberOfVoters": 9900,// The current amount of votes
-        "nameOfParliament": "Jakarin Chujan", // Parliament name
-        "nameOfParty": "Catnip" // Party that parliament are with
-                
-    },
-    {
-        "location_id": 2,
-        "location": "Bang Len",
-        "numberOfVoters": 9900,
-        "nameOfParliament": "Chananya Photan", 
-        "nameOfParty": "Catnip"
-    },
-    {
-        "location_id": 3,
-        "location": "Lad yao",
-        "numberOfVoters": 9900,
-        "nameOfParliament": "Ne Netitorn", 
-        "nameOfParty": "Catnip"
-    },
-])
