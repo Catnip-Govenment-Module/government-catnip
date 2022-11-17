@@ -27,7 +27,7 @@ async def check_connect_mongodb():
         raise HTTPException(status_code=500, detail=f"Unable to connect to the server")
     return client
 
-def get_district(db):
+async def get_district(db):
     db_district = db["district"]
     dt = db_district.find({}, {"_id": 0})
     dt_list = [q for q in dt]
@@ -43,11 +43,12 @@ async def root():
 @app.get("/api/v1/election-results", summary="Return the election results", response_model=List[ElectionResultForVoter])
 async def election_result(db: Database = Depends(get_db)):
   db_election_result = db["election_result"]
-  list_district = get_district(db)
-  new_election_result = []
   # Check that the election results are empty or not
   if db_election_result.count_documents({}) > 0:
-    for election in db_election_result.find({}, {"_id": 0}):
+    list_district =  await get_district(db)
+    new_election_result = []
+    list_results = list(db_election_result.find({}, {"_id": 0}))
+    for election in list_results:
         for district in list_district:
             # Check location_id from election result and district_id from district
             if district["district_id"] == election["location_id"]:
