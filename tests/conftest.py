@@ -67,6 +67,34 @@ def mock_population(db_population):
             "blackList": False
         }])
 
+@pytest.fixture()
+def db_election_result():
+    yield db["election_result"]
+
+@pytest.fixture()
+def db_district():
+    yield db["district"]
+
+@pytest.fixture()
+def mock_district(db_district):
+    db_district.insert_many([
+        {
+            "district_id": 1,
+            "district": "Amphawa",
+            "districtTH": "อัมพวา",
+            "province": "Samut Songkhram",
+            "provinceTH": "สมุทรสงคราม",
+            "region": "Centre"
+        },
+        {
+            "district_id": 2,
+            "district": "Bang Len",
+            "districtTH": "บางเลน",
+            "province": "Nakhon Pathom",
+            "provinceTH": "นครปฐม",
+            "region": "Centre"
+        }
+    ])
 
 @pytest.fixture()
 def client():
