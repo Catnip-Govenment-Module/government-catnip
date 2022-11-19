@@ -97,6 +97,24 @@ def mock_district(db_district):
     ])
 
 @pytest.fixture()
+def db_personal_cvv():
+    yield db["personal_cvv"]
+
+@pytest.fixture()
+def mock_person_cvv(db_personal_cvv):
+    db_personal_cvv.insert_many([
+    {
+        "citizen_id": 440556794906,
+        "cvv": "$2b$12$xFOUTVJjht350Ik7D1eQhOB1yB0/yog4etgEbn4aDk3Jf3CT65rm."
+    },
+    {
+        "citizen_id": 173518749711,
+        "cvv": "$2b$12$UHsLQtJ5hit1XZyEYHo9IO.61aDeJV/rdc1/mp35OwJKcISe.hN0W"
+    }
+])
+
+
+@pytest.fixture()
 def client():
     yield TestClient(app)
 
