@@ -31,20 +31,12 @@ db.personal_information.insertMany([
 
 db.personal_cvv.insertMany([
     {
-        "citizen_id": 4569871354123,
-        "cvv": "267d303819c7fa1c19716d44316e8a1d63f4a76fdeca8aa337d5215d60dca0f3"
+        "citizen_id": 440556794906,
+        "cvv": "$2b$12$xFOUTVJjht350Ik7D1eQhOB1yB0/yog4etgEbn4aDk3Jf3CT65rm."
     },
     {
-        "citizen_id": 1234567898765,
-        "cvv": "e192ab76c7830b54f5d70e09ed920511f5f2f1afc468f5379ded05fdd71ab6a5"
-    },
-    {
-        "_id": 5432167890123,
-        "cvv": "$2b$12$HvzlezQKk8PTr0KJLXfdieJ4xxvBid8oi/mPTkAy7f5vO3JYifiEa"
-    },
-    {
-        "_id": 9876543210123,
-        "cvv": "$2b$12$vodou5Y/pZ/.6q7S8KOtNul2sKZXOJ7pm3TgAwx68pxlqTHgzI1uq"
+        "citizen_id": 173518749711,
+        "cvv": "$2b$12$UHsLQtJ5hit1XZyEYHo9IO.61aDeJV/rdc1/mp35OwJKcISe.hN0W"
     }
 ])
 

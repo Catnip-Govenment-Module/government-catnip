@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List
 from fastapi import FastAPI, HTTPException, Depends
 from pymongo import MongoClient
 from passlib.context import CryptContext
@@ -11,6 +11,7 @@ from app.models.election_result import ElectionResult
 from app.models.population import Population
 
 from app.models.election_result_voter import ElectionResultForVoter
+from app.models.person_cvv import Person_cvv
 
 
 from pydantic import BaseModel
@@ -46,29 +47,22 @@ async def root():
     }
 
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+async def verify_password(cvv, hashed_cvv):
+    pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+    return pwd_context.verify(cvv, hashed_cvv)
 
-def verify_password(plain_password, hashed_password):
-     return pwd_context.verify(plain_password, hashed_password)
-
-def get_password_hash(password):
-     return pwd_context.hash(password)
-
-def authenticate_user(collection_users, citizen_id: str, password: str):
-     user = collection_users.find_one({"_id": citizen_id}, {"cvv": 1})
-     if not user:
-         return False
-     if not verify_password(password, user["cvv"]):
-         return False
-     return user
-
-@app.get("/validate_cvv/{citizen_id}/{cvv}", summary="Return response code matching cvv and citizen_id or not")
-def check_cvv(citizen_id: int, cvv: str, db: Database=Depends(get_db)):
-    db_cvv = db["personal_cvv"]
-    user = authenticate_user(db_cvv, citizen_id, cvv)
+async def authenticate_user(collection_users, citizen_id: str, cvv: str):
+    user = collection_users.find_one({"citizen_id": citizen_id}, {"_id":0})
     if not user:
-        return HTTPException(status_code=404, detail=f"Person information not validated")
-    return HTTPException(status_code=200, detail=f"Personal information validated!")
+        raise HTTPException(status_code=404, detail=False)
+    if not await verify_password(cvv, user["cvv"]):
+        raise HTTPException(status_code=401, detail=False)
+
+@app.post("/validate_cvv/", summary="Return response code matching cvv and citizen_id or not")
+async def check_cvv(person_cvv:Person_cvv, db: Database=Depends(get_db)):
+    db_cvv = db["personal_cvv"]
+    await authenticate_user(db_cvv, person_cvv.citizen_id, person_cvv.cvv)
+    return {"detail": True}
     
 @app.get("/api/v1/election-results", summary="Return the election results", response_model=List[ElectionResultForVoter])
 async def election_result(db: Database = Depends(get_db)):
@@ -125,4 +119,3 @@ async def all_population_info(db: Database = Depends(get_db)):
     if list_population:
         return list_population
     raise HTTPException(status_code=404, detail="No data")
-
