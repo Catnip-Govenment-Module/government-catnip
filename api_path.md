@@ -1,5 +1,9 @@
 # API Path
 
+## Base url
+
+### ```/api/v1```
+
 ##  ```GET```
 
 ### ```/population```
