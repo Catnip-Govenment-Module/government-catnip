@@ -6,3 +6,10 @@ class Location(BaseModel):
     location: str
     population: int
     numberOfVoters: int
+
+
+response_location = {404: {"content": {
+    "application/json": {
+        "example": {"detail": "No data"}
+    }
+}}}
