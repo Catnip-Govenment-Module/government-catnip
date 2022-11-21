@@ -10,3 +10,10 @@ class Population(BaseModel):
     locationID: int
     rightToVote: bool
     blackList: bool
+
+
+response_population = {404: {"content": {
+    "application/json": {
+        "example": {"detail": "No data"}
+    }
+}}}
