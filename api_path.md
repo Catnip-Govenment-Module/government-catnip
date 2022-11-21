@@ -18,8 +18,8 @@ Get the population data
             "lastName": "Sukkasem", // Last name
             "sex": "Female", // Gender
             "locationID": 231, // Location ID 
-            "rightToVote": True, // The person have a right to vote or not
-            "blackList": False // The person have a right to be MP or not
+            "rightToVote": true, // The person have a right to vote or not
+            "blackList": false // The person have a right to be MP or not
         },
         {
             "citizen_id": 4569871354123,
@@ -28,8 +28,8 @@ Get the population data
             "lastName": "Saengthong",
             "sex": "Male",
             "locationID": 557,
-            "rightToVote": True,
-            "blackList": False
+            "rightToVote": true,
+            "blackList": false
         },
         .
         .
@@ -130,5 +130,17 @@ To update the election detail.
         .
         .
     ]
+}
+```
+
+### ```/validate-cvv```
+Verify whether the citizen id and CVV match.
+
+**Request body:** application/json  
+**Response:** 200 OK  
+
+```js
+{
+    "detail" : true
 }
 ```
