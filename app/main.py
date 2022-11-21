@@ -1,3 +1,6 @@
+import asyncio
+import uvicorn
+
 from typing import List
 from fastapi import FastAPI, HTTPException, Depends
 from pymongo import MongoClient
@@ -126,3 +129,12 @@ async def all_population_info(db: Database = Depends(get_db)):
     if list_population:
         return list_population
     raise HTTPException(status_code=404, detail="No data")
+
+
+async def main():
+    config = uvicorn.Config("main:app", log_level="info", host="0.0.0.0", port=80)
+    server = uvicorn.Server(config)
+    await server.serve()
+
+if __name__ == "__main__":
+    asyncio.run(main())
