@@ -59,7 +59,7 @@ async def authenticate_user(collection_users: Collection, citizen_id: int, cvv: 
         raise HTTPException(status_code=401, detail=False)
 
 
-@app.post("/validate_cvv/", summary="Return response code matching cvv and citizen_id or not",
+@app.post("/api/v1/validate-cvv", summary="Return response code matching cvv and citizen_id or not",
           responses=response_person_cvv)
 async def check_cvv(person_cvv: PersonCVV, db: Database = Depends(get_db)):
     db_cvv = db["personal_cvv"]
