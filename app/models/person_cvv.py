@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 class PersonCVV(BaseModel):
-    citizen_id: int
+    citizenID: int
     cvv: str
 
 
