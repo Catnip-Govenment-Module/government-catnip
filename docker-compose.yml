@@ -5,6 +5,7 @@ services:
   # Database - Mongo DB
   db:
     image: mongo
+    container_name: db
     environment:
       MONGO_INITDB_DATABASE: government_catnip
     ports:
@@ -12,13 +13,13 @@ services:
     volumes:
       - ./database/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 #      - ./init-mongodb/data:/tmp/data — contains a JSON file with an array
-
+  
   app:
-    build: 
-      context: .
-      dockerfile: Dockerfile
+    build: .
+    container_name: fast
+
     restart: always
     ports:
-      - "8000:80"
+      - "8000:5000"
     volumes:
-      - ./app:/code/app
+      - ./app:/app

@@ -1,3 +1,7 @@
+import asyncio
+import uvicorn
+import os
+
 from typing import List
 from fastapi import FastAPI, HTTPException, Depends
 from pymongo import MongoClient
@@ -7,14 +11,14 @@ from fastapi.encoders import jsonable_encoder
 from pymongo.collection import Collection
 from pymongo.database import Database
 
-from app.models.location import Location, response_location
-from app.models.election_result import ElectionResult, response_election_results_ec
-from app.models.person_cvv import PersonCVV, response_person_cvv
-from app.models.population import Population, response_population
-from app.models.election_result_voter import ElectionResultForVoter, response_election_results_voter
+from models.location import Location, response_location
+from models.election_result import ElectionResult, response_election_results_ec
+from models.person_cvv import PersonCVV, response_person_cvv
+from models.population import Population, response_population
+from models.election_result_voter import ElectionResultForVoter, response_election_results_voter
 
 app = FastAPI()
-
+port = int(os.environ.get("PORT", 5000))
 
 async def get_db():
     client = await check_connect_mongodb()
@@ -24,7 +28,7 @@ async def get_db():
 
 async def check_connect_mongodb():
     try:
-        client = MongoClient(host="db")
+        client = MongoClient(host="mongodb+srv://catnip:catnip2022@governmentcatnip.6loikcf.mongodb.net/test")
         client.server_info()
     except Exception:
         raise HTTPException(status_code=500, detail=f"Unable to connect to the server")
@@ -126,3 +130,12 @@ async def all_population_info(db: Database = Depends(get_db)):
     if list_population:
         return list_population
     raise HTTPException(status_code=404, detail="No data")
+
+
+async def main():
+    config = uvicorn.Config("main:app", log_level="info", host="0.0.0.0", port=port)
+    server = uvicorn.Server(config)
+    await server.serve()
+
+if __name__ == "__main__":
+    asyncio.run(main())
