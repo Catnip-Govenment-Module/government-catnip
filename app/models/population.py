@@ -9,7 +9,7 @@ class Population(BaseModel):
     sex: str
     locationID: int
     rightToVote: bool
-    blackList: bool
+    blacklist: bool
 
 
 response_population = {404: {"content": {
