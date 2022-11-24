@@ -1,5 +1,6 @@
 import asyncio
 import uvicorn
+import os
 
 from typing import List
 from fastapi import FastAPI, HTTPException, Depends
@@ -17,7 +18,7 @@ from models.population import Population, response_population
 from models.election_result_voter import ElectionResultForVoter, response_election_results_voter
 
 app = FastAPI()
-
+port = int(os.environ.get("PORT", 5000))
 
 async def get_db():
     client = await check_connect_mongodb()
@@ -27,7 +28,7 @@ async def get_db():
 
 async def check_connect_mongodb():
     try:
-        client = MongoClient(host="db")
+        client = MongoClient(host="mongodb+srv://catnip:catnip2022@governmentcatnip.6loikcf.mongodb.net/test")
         client.server_info()
     except Exception:
         raise HTTPException(status_code=500, detail=f"Unable to connect to the server")
@@ -132,7 +133,7 @@ async def all_population_info(db: Database = Depends(get_db)):
 
 
 async def main():
-    config = uvicorn.Config("main:app", log_level="info", host="0.0.0.0", port=80)
+    config = uvicorn.Config("main:app", log_level="info", host="0.0.0.0", port=port)
     server = uvicorn.Server(config)
     await server.serve()
 

@@ -9,6 +9,6 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 COPY ./app /code/app
 
 # Export the container port for outsider to connect.
-EXPOSE 80
+EXPOSE 5000
 
 CMD ["python", "app/main.py"]
