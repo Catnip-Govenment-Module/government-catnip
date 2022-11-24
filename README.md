@@ -25,3 +25,7 @@ docker-compose up -d --build
 
 4.Click on this link to view the documentation of the web API which is the default port we have set.    
   http://localhost:8000/docs  
+  
+5.If you see the web as shown in this image, it implies you may use it.  
+![image](https://user-images.githubusercontent.com/72879083/203803188-3093e14b-fd35-450c-8e9a-04df6c7143da.png)  
+
