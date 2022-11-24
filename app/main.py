@@ -10,11 +10,11 @@ from fastapi.encoders import jsonable_encoder
 from pymongo.collection import Collection
 from pymongo.database import Database
 
-from app.models.location import Location, response_location
-from app.models.election_result import ElectionResult, response_election_results_ec
-from app.models.person_cvv import PersonCVV, response_person_cvv
-from app.models.population import Population, response_population
-from app.models.election_result_voter import ElectionResultForVoter, response_election_results_voter
+from models.location import Location, response_location
+from models.election_result import ElectionResult, response_election_results_ec
+from models.person_cvv import PersonCVV, response_person_cvv
+from models.population import Population, response_population
+from models.election_result_voter import ElectionResultForVoter, response_election_results_voter
 
 app = FastAPI()
 
