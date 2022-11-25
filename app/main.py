@@ -1,6 +1,6 @@
 import asyncio
-import uvicorn
 import os
+import uvicorn
 
 from typing import List
 from fastapi import FastAPI, HTTPException, Depends
