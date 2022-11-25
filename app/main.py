@@ -56,10 +56,10 @@ async def verify_password(cvv: str, hashed_cvv: str):
 
 
 async def authenticate_user(collection_users: Collection, citizen_id: int, cvv: str):
-    user = collection_users.find_one({"citizen_id": citizen_id}, {"_id": 0})
+    user = collection_users.find_one({"citizenID": citizen_id}, {"_id": 0})
     if not user:
         raise HTTPException(status_code=404, detail=False)
-    if not await verify_password(cvv, user["cvv"]):
+    if not await verify_password(cvv, user["citizenCVV"]):
         raise HTTPException(status_code=401, detail=False)
 
 
@@ -67,7 +67,7 @@ async def authenticate_user(collection_users: Collection, citizen_id: int, cvv: 
           responses=response_person_cvv)
 async def check_cvv(person_cvv: PersonCVV, db: Database = Depends(get_db)):
     db_cvv = db["personal_cvv"]
-    await authenticate_user(db_cvv, person_cvv.citizen_id, person_cvv.cvv)
+    await authenticate_user(db_cvv, person_cvv.citizenID, person_cvv.citizenCVV)
     return {"detail": True}
 
 
@@ -83,7 +83,7 @@ async def election_result(db: Database = Depends(get_db)):
         for election in list_results:
             for district in list_district:
                 # Check location_id from election result and district_id from district
-                if district["district_id"] == election["location_id"]:
+                if district["districtID"] == election["locationID"]:
                     # Create new election results for voter
                     new_result = {
                         "district": district["district"],

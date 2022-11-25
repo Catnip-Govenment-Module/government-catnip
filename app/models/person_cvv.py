@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 class PersonCVV(BaseModel):
     citizenID: int
-    cvv: str
+    citizenCVV: str
 
 
 response_person_cvv = {
