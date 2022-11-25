@@ -3,3 +3,6 @@ README.md
 # workspace
 .vscode
 __pycache__/
+
+# test
+app/tests/
