@@ -1,7 +1,7 @@
 import mongomock
 import pytest
 from fastapi.testclient import TestClient
-from app.main import app, get_db
+from main import app, get_db
 
 mongo_client = mongomock.MongoClient()
 db = mongo_client["government_catnip"]
