@@ -24,13 +24,13 @@ def db_location():
 def mock_location(db_location):
     db_location.insert_many([
         {
-            "location_id": 1,
+            "locationID": 1,
             "location": "Amphawa",
             "population": 10000,
             "numberOfVoters": 9995
         },
         {
-            "location_id": 2,
+            "locationID": 2,
             "location": "Bang Len",
             "population": 20000,
             "numberOfVoters": 18995
@@ -47,39 +47,42 @@ def db_population():
 def mock_population(db_population):
     db_population.insert_many([
         {
-            "citizen_id": 4569871354123,
+            "citizenID": 4569871354123,
             "title": "Mr.",
             "firstName": "Anuman",
             "lastName": "Saengthong",
             "sex": "Male",
             "locationID": 557,
             "rightToVote": True,
-            "blackList": False
+            "blacklist": False
         },
         {
-            "citizen_id": 1234567898765,
+            "citizenID": 1234567898765,
             "title": "Ms.",
             "firstName": "Achara",
             "lastName": "Sukkasem",
             "sex": "Female",
             "locationID": 231,
             "rightToVote": True,
-            "blackList": False
+            "blacklist": False
         }])
+
 
 @pytest.fixture()
 def db_election_result():
     yield db["election_result"]
 
+
 @pytest.fixture()
 def db_district():
     yield db["district"]
+
 
 @pytest.fixture()
 def mock_district(db_district):
     db_district.insert_many([
         {
-            "district_id": 1,
+            "districtID": 1,
             "district": "Amphawa",
             "districtTH": "อัมพวา",
             "province": "Samut Songkhram",
@@ -87,7 +90,7 @@ def mock_district(db_district):
             "region": "Centre"
         },
         {
-            "district_id": 2,
+            "districtID": 2,
             "district": "Bang Len",
             "districtTH": "บางเลน",
             "province": "Nakhon Pathom",
@@ -96,22 +99,24 @@ def mock_district(db_district):
         }
     ])
 
+
 @pytest.fixture()
 def db_personal_cvv():
     yield db["personal_cvv"]
 
+
 @pytest.fixture()
 def mock_person_cvv(db_personal_cvv):
     db_personal_cvv.insert_many([
-    {
-        "citizen_id": 440556794906,
-        "cvv": "$2b$12$xFOUTVJjht350Ik7D1eQhOB1yB0/yog4etgEbn4aDk3Jf3CT65rm."
-    },
-    {
-        "citizen_id": 173518749711,
-        "cvv": "$2b$12$UHsLQtJ5hit1XZyEYHo9IO.61aDeJV/rdc1/mp35OwJKcISe.hN0W"
-    }
-])
+        {
+            "citizenID": 440556794906,
+            "citizenCVV": "$2b$12$xFOUTVJjht350Ik7D1eQhOB1yB0/yog4etgEbn4aDk3Jf3CT65rm."
+        },
+        {
+            "citizenID": 173518749711,
+            "citizenCVV": "$2b$12$UHsLQtJ5hit1XZyEYHo9IO.61aDeJV/rdc1/mp35OwJKcISe.hN0W"
+        }
+    ])
 
 
 @pytest.fixture()

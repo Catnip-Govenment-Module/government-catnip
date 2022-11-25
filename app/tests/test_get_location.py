@@ -1,11 +1,11 @@
 def test_get_location(mock_mongo, client, mock_location):
     test_get_all_location = [
-        {"location_id": 1,
+        {"locationID": 1,
          "location": "Amphawa",
          "population": 10000,
          "numberOfVoters": 9995
          },
-        {"location_id": 2,
+        {"locationID": 2,
          "location": "Bang Len",
          "population": 20000,
          "numberOfVoters": 18995
