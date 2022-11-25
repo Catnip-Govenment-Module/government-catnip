@@ -10,17 +10,17 @@ Government catnip is a web API that provides information such as population and 
 
 1.Clone this repository to your computer.  
 ```bash
-git clone https://github.com/Catnip-Govenment-Module/government-catnip.git
+$ git clone https://github.com/Catnip-Govenment-Module/government-catnip.git
 ```  
 
 2.Change directory to the repository.  
 ```bash
-cd government-catnip
+$ cd government-catnip
 ```  
 
 3.Run docker-compose to build and run containers  
 ```dockerfile
-docker-compose up -d --build
+$ docker-compose up -d --build
 ```  
 
 4.Click on this link to view the documentation of the web API which is the default port we have set.    
