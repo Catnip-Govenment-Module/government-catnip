@@ -16,7 +16,7 @@ Get the population data
 {
     [
         {
-            "citizen_id": 1234567898765, // Citizen ID
+            "citizenID": 1234567898765, // Citizen ID
             "title": "Ms.", // Person's title
             "firstName": "Achara", // First name
             "lastName": "Sukkasem", // Last name
@@ -26,7 +26,7 @@ Get the population data
             "blackList": false // The person have a right to be MP or not
         },
         {
-            "citizen_id": 4569871354123,
+            "citizenID": 4569871354123,
             "title": "Mr.",
             "firstName": "Anuman",
             "lastName": "Saengthong",
@@ -51,13 +51,13 @@ To get all information about election of all district
 {
     [
         {
-            "location_id": 1, // ID of location
+            "locationID": 1, // ID of location
             "location": "Amphawa", // Location
             "population": 10000, // Population in this location
             "numberOfVoters": 9995 // Amount of who have right to vote
         },
         {
-            "location_id": 2,
+            "locationID": 2,
             "location": "Bang Len",
             "population": 20000,
             "numberOfVoters": 18995
@@ -116,7 +116,7 @@ To update the election detail.
 {
     [
         {
-            "location_id": 1, // ID of location
+            "locationID": 1, // ID of location
             "location": "Amphawa", // Location
             "numberOfVoters": 9900,// The current amount of votes
             "nameOfParliament": "Jakarin Chujan", // Parliament name
@@ -124,7 +124,7 @@ To update the election detail.
             
         },
         {
-            "location_id": 2,
+            "locationID": 2,
             "location": "Bang Len",
             "numberOfVoters": 9900,
             "nameOfParliament": "Chananya Photan", 
