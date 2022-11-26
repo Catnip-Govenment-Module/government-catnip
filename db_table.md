@@ -4,17 +4,17 @@
 
 ```js
 {
-     "citizen_id": number,
+     "citizenID": number,
      "title": string,
      "firstName": string,
      "lastName": string,
      "sex": string,
      "locationID": number,
      "rightToVote": boolean,
-     "blackList": boolean
+     "blacklist": boolean
 }
 ```
-### citizen_id
+### citizenID
 The person's citizen identification number
 
 ### title
@@ -42,12 +42,12 @@ a person's eligibility to register to be a member of parliament in an election
 
 ```js
 {
-     "citizen_id": number,
+     "citizenID": number,
      "citizenCVV": hash
 }
 ```
 
-### citizen_id
+### citizenID
 The person's citizen identification number
 
 ### citizenCVV
@@ -57,14 +57,14 @@ The person's citizen identification card verification value number
 
 ```js
 {
-     "location_id": number, 
+     "locationID": number, 
      "location": string,
      "population": number,
      "numberOfVoters": number
 }
 ```
 
-### location_id
+### locationID
 It's the id of location
 
 ### location
@@ -80,36 +80,43 @@ It's the number of people that have a right to vote in this location
 
 ```js
 {
-     "location_id" : number,
-     "memberID": number,
-     "nameOfParliament": string,
-     "nameOfParty": string,
-     "numberOfVoters": number,
+    "district": "string",
+    "districtTH": "string",
+    "province": "string",
+    "provinceTH": "string",
+    "region": "string",
+    "nameOfParliament": "string",
+    "nameOfParty": "string"
 }
      
 ```
 
-### location_id
-ID of location_id
+### district
+The name of district in English.  
 
-### memberID
-ID of member of parliament in location
+### districtTH
+The name of district in Thai.  
 
-### nameOfParliament
+### province  
+The name of province in English.  
+
+### provinceTH  
+The name of province in Thai.  
+
+### region  
+The region's name.  
+
+### nameOfParliament  
 The name of member of parliament in location
 
 ### nameOfParty
-The name of the party that member of parliament are work for
-
-### numberOfVoters
-Amount of population have been voted in this location
-
+The name of the party that member of parliament are work for.  
 
 ## district
 
 ```js
 {
-     "district_id": string,
+     "districtID": string,
      "district": string,
      "districtTH": string,
      "province": string,
@@ -118,7 +125,7 @@ Amount of population have been voted in this location
 }
 ```
 
-### district_id
+### districtID
 ID of district
 
 ### district
