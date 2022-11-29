@@ -17,7 +17,7 @@ response_election_results_ec = {
     }}
     , 404: {"content": {
         "application/json": {
-            "example": {"detail": "Empty list"}
+            "example": {"detail": "The information sent is an empty list"}
         }
     }}
 }

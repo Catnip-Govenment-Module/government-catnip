@@ -3,24 +3,24 @@ def test_get_population_endpoint(mock_mongo, mock_population, client):
     assert response.status_code == 200
     assert response.json() == [
    {
-        "citizen_id": 4569871354123,
+        "citizenID": 4569871354123,
         "title": "Mr.",
         "firstName": "Anuman",
         "lastName": "Saengthong",
         "sex": "Male",
         "locationID": 557,
         "rightToVote": True,
-        "blackList": False
+        "blacklist": False
     },
     {
-        "citizen_id": 1234567898765,
+        "citizenID": 1234567898765,
         "title": "Ms.",
         "firstName": "Achara",
         "lastName": "Sukkasem",
         "sex": "Female",
         "locationID": 231,
         "rightToVote": True,
-        "blackList": False
+        "blacklist": False
     }
     ]
 

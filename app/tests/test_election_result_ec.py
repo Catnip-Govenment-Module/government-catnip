@@ -9,7 +9,7 @@ def test_post_json_with_wrong_format(mock_mongo, client):
 def test_post_json(mock_mongo, client):
     response = client.post(
         "/api/v1/election-results", json={
-            "location_id": 1,
+            "locationID": 1,
             "location": "Amphawa",
             "numberOfVoters": 9900,
             "nameOfParliament": "Jakarin Chujan",
@@ -28,7 +28,7 @@ def test_post_form_no_body(mock_mongo, client):
 def test_post_election_result(mock_mongo, client):
     data = [
         {
-            "location_id": 1,
+            "locationID": 1,
             "location": "Amphawa",
             "numberOfVoters": 9900,
             "nameOfParliament": "Jakarin Chujan",
@@ -36,7 +36,7 @@ def test_post_election_result(mock_mongo, client):
 
         },
         {
-            "location_id": 2,
+            "locationID": 2,
             "location": "Bang Len",
             "numberOfVoters": 9900,
             "nameOfParliament": "Chananya Photan",
