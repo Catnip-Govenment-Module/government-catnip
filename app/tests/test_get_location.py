@@ -1,4 +1,4 @@
-def test_get_location(mock_mongo, client, mock_location):
+def test_get_location(client, mock_location):
     test_get_all_location = [
         {"locationID": 1,
          "location": "Amphawa",
@@ -17,8 +17,7 @@ def test_get_location(mock_mongo, client, mock_location):
     assert response.json() == test_get_all_location
 
 
-def test_get_all_location_but_not_data(mock_mongo, client, db_location):
-    db_location.delete_many({})
+def test_get_all_location_but_not_data(client, db_location):
     test_get_location_no_data = {"detail": "No data"}
     response = client.get("/api/v1/locations")
     assert response.status_code == 404

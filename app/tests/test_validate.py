@@ -1,4 +1,4 @@
-def test_check_validate_valid(client, mock_person_cvv, mock_mongo):
+def test_check_validate_valid(client, mock_person_cvv):
     """Correct params"""
     test_check_validate_valid = {
         "citizenID": 440556794906,
@@ -9,7 +9,7 @@ def test_check_validate_valid(client, mock_person_cvv, mock_mongo):
     assert response.json() == {"detail": True}
 
 
-def test_check_validate_incorrect_cvv(client, mock_mongo):
+def test_check_validate_incorrect_cvv(client, mock_person_cvv):
     response = client.post("/api/v1/validate-cvv")
     test_check_validate_incorrect_cvv = {
         "citizenID": 440556794906,
@@ -20,7 +20,7 @@ def test_check_validate_incorrect_cvv(client, mock_mongo):
     assert response.json() == {"detail": False}
 
 
-def test_check_validate_not_found_user(client, mock_mongo):
+def test_check_validate_not_found_user(client, mock_person_cvv):
     test_check_validate_not_found_user = {
         "citizenID": 440556794456,
         "citizenCVV": "EC1-3610374-46"
