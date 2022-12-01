@@ -1,4 +1,4 @@
-def test_post_json_with_wrong_format(mock_mongo, client):
+def test_post_json_with_wrong_format(db_election_result, client):
     response = client.post(
         "/api/v1/election-results",
         json={"id": "bazz", "title": "Bazz", "description": "Drop the bazz"},
@@ -6,7 +6,7 @@ def test_post_json_with_wrong_format(mock_mongo, client):
     assert response.status_code == 422
 
 
-def test_post_json(mock_mongo, client):
+def test_post_json(db_election_result, client):
     response = client.post(
         "/api/v1/election-results", json={
             "locationID": 1,
@@ -20,12 +20,12 @@ def test_post_json(mock_mongo, client):
     assert response.status_code == 422
 
 
-def test_post_form_no_body(mock_mongo, client):
+def test_post_form_no_body(db_election_result, client):
     response = client.post("/api/v1/election-results")
     assert response.status_code == 422
 
 
-def test_post_election_result(mock_mongo, client):
+def test_post_election_result(db_election_result, client):
     data = [
         {
             "locationID": 1,
@@ -51,7 +51,7 @@ def test_post_election_result(mock_mongo, client):
     assert response.json() == {"detail": "Complete"}
 
 
-def test_post_empty_list(mock_mongo, client):
+def test_post_empty_list(db_election_result, client):
     response = client.post(
         "/api/v1/election-results",
         json=[]

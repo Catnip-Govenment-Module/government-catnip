@@ -3,21 +3,23 @@ import pytest
 from fastapi.testclient import TestClient
 from main import app, get_db
 
-mongo_client = mongomock.MongoClient()
-db = mongo_client["government_catnip"]
-
 
 @pytest.fixture()
 def mock_mongo():
+    mongo_client = mongomock.MongoClient()
+    db = mongo_client["government_catnip"]
+
     def fake_db():
         return db
 
     app.dependency_overrides[get_db] = fake_db
 
+    yield db
+
 
 @pytest.fixture()
-def db_location():
-    yield db["location_information"]
+def db_location(mock_mongo):
+    yield mock_mongo["location_information"]
 
 
 @pytest.fixture()
@@ -39,8 +41,8 @@ def mock_location(db_location):
 
 
 @pytest.fixture()
-def db_population():
-    yield db["personal_information"]
+def db_population(mock_mongo):
+    yield mock_mongo["personal_information"]
 
 
 @pytest.fixture()
@@ -69,13 +71,34 @@ def mock_population(db_population):
 
 
 @pytest.fixture()
-def db_election_result():
-    yield db["election_result"]
+def db_election_result(mock_mongo):
+    yield mock_mongo["election_result"]
 
 
 @pytest.fixture()
-def db_district():
-    yield db["district"]
+def mock_election_result(db_election_result):
+    db_election_result.insert_many([
+        {
+            "locationID": 1,
+            "location": "Amphawa",
+            "numberOfVoters": 9900,
+            "nameOfParliament": "Jakarin Chujan",
+            "nameOfParty": "Catnip"
+
+        },
+        {
+            "locationID": 2,
+            "location": "Bang Len",
+            "numberOfVoters": 9900,
+            "nameOfParliament": "Chananya Photan",
+            "nameOfParty": "Catnip"
+        }
+    ])
+
+
+@pytest.fixture()
+def db_district(mock_mongo):
+    yield mock_mongo["district"]
 
 
 @pytest.fixture()
@@ -101,8 +124,8 @@ def mock_district(db_district):
 
 
 @pytest.fixture()
-def db_personal_cvv():
-    yield db["personal_cvv"]
+def db_personal_cvv(mock_mongo):
+    yield mock_mongo["personal_cvv"]
 
 
 @pytest.fixture()
@@ -122,4 +145,3 @@ def mock_person_cvv(db_personal_cvv):
 @pytest.fixture()
 def client():
     yield TestClient(app)
-
